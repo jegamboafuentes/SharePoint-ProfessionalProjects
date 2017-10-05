@@ -1,0 +1,365 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:dt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882"
+ xmlns:s="uuid:BDC6E3F0-6DA3-11d1-A2A3-00AA00C14882"
+ xmlns:rs="urn:schemas-microsoft-com:rowset" xmlns:z="#RowsetSchema"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Version>11.6408</Version>
+ </DocumentProperties>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <HidePivotTableFieldList/>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s21">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s23">
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s24">
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="Background"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s25">
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s26">
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <NumberFormat/>
+  </Style>
+  <Style ss:ID="s27">
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <NumberFormat/>
+  </Style>
+  <Style ss:ID="s28">
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s29">
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <NumberFormat/>
+  </Style>
+  <Style ss:ID="s30">
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <NumberFormat/>
+  </Style>
+  <Style ss:ID="s31">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s32">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <NumberFormat/>
+  </Style>
+  <Style ss:ID="s33">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <NumberFormat/>
+  </Style>
+ </Styles>
+ <Names>
+  <NamedRange ss:Name="_data" ss:RefersTo="='_$Resources:AuditReportTemplate_DataWorksheetName'!R1C1:R2C14"/>
+ </Names>
+ <Worksheet ss:Name="$Resources:AuditReportTemplate_ChartWorksheetName">
+  <Table ss:ExpandedColumnCount="9" ss:ExpandedRowCount="7" x:FullColumns="1"
+   x:FullRows="1">
+   <Column ss:AutoFitWidth="0" ss:Width="183.75"/>
+   <Column ss:AutoFitWidth="0" ss:Width="40.5"/>
+   <Column ss:AutoFitWidth="0" ss:Width="55.5" ss:Span="2"/>
+   <Column ss:Index="6" ss:Width="208.5"/>
+   <Column ss:AutoFitWidth="0" ss:Width="55.5"/>
+   <Column ss:Width="208.5"/>
+   <Column ss:Width="55.5"/>
+   <Row>
+    <Cell ss:StyleID="s21"><Data ss:Type="String">SiteId</Data></Cell>
+    <Cell ss:StyleID="s21"><Data ss:Type="String">(All)</Data></Cell>
+   </Row>
+   <Row ss:Index="3">
+    <Cell ss:StyleID="s23"><Data ss:Type="String">Count of Occurred</Data></Cell>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">Event</Data></Cell>
+    <Cell ss:StyleID="s24"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">ItemId</Data></Cell>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">View</Data></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Grand Total</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">00000000-0000-0000-0000-000000000000</Data></Cell>
+    <Cell ss:StyleID="s26"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s27"><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s28"><Data ss:Type="String">(blank)</Data></Cell>
+    <Cell ss:StyleID="s29"/>
+    <Cell ss:StyleID="s29"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s31"><Data ss:Type="String">Grand Total</Data></Cell>
+    <Cell ss:StyleID="s32"><Data ss:Type="Number">3</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>2</ActiveRow>
+     <ActiveCol>2</ActiveCol>
+    </Pane>
+   </Panes>
+   <Selected/>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+  <PivotTable xmlns="urn:schemas-microsoft-com:office:excel">
+   <Name>PivotTable1</Name>
+   <ImmediateItemsOnDrop/>
+   <ShowPageMultipleItemLabel/>
+   <CompactRowIndent>0</CompactRowIndent>
+   <Location>R1C1:R7C4</Location>
+   <VersionLastUpdate>3</VersionLastUpdate>
+   <DefaultVersion>1</DefaultVersion>
+   <PivotField>
+    <Name>$Resources:AuditReportTemplate_SiteId</Name>
+    <Orientation>Page</Orientation>
+    <Position>1</Position>
+    <PivotItem>
+     <Name>00000000-0000-0000-0000-000000000000</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name></Name>
+    </PivotItem>
+   </PivotField>
+   <PivotField>
+    <Name>$Resources:AuditReportTemplate_ItemId</Name>
+   </PivotField>
+   <PivotField>
+    <Name>$Resources:AuditReportTemplate_ItemType</Name>
+   </PivotField>
+   <PivotField>
+    <Name>$Resources:AuditReportTemplate_UserId</Name>
+    <DataType>Integer</DataType>
+   </PivotField>
+   <PivotField>
+    <Name>$Resources:AuditReportTemplate_MachineName</Name>
+   </PivotField>
+   <PivotField>
+    <Name>$Resources:AuditReportTemplate_MachineIP</Name>
+   </PivotField>
+   <PivotField>
+    <Name>$Resources:AuditReportTemplate_DocLocation</Name>
+    <Orientation>Row</Orientation>
+    <Position>1</Position>
+    <PivotItem>
+     <Name>$Resources:AuditReportTemplate_DocLocation</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name></Name>
+    </PivotItem>
+   </PivotField>
+   <PivotField>
+    <Name>$Resources:AuditReportTemplate_LocationType</Name>
+   </PivotField>
+   <PivotField>
+    <Name>$Resources:AuditReportTemplate_Occurred</Name>
+    <DataType>Date</DataType>
+   </PivotField>
+   <PivotField>
+    <Name>$Resources:AuditReportTemplate_Event</Name>
+    <Orientation>Column</Orientation>
+    <Position>1</Position>
+    <PivotItem>
+     <Name>$Resources:AuditReportTemplate_View</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name></Name>
+     <Hidden/>
+     <Missing/>
+    </PivotItem>
+   </PivotField>
+   <PivotField>
+    <Name>$Resources:AuditReportTemplate_EventName</Name>
+   </PivotField>
+   <PivotField>
+    <Name>$Resources:AuditReportTemplate_EventSource</Name>
+   </PivotField>
+   <PivotField>
+    <Name>$Resources:AuditReportTemplate_SourceName</Name>
+   </PivotField>
+   <PivotField>
+    <Name>$Resources:AuditReportTemplate_EventData</Name>
+   </PivotField>
+   <PivotField>
+    <DataField/>
+    <Name>$Resources:AuditReportTemplate_Data</Name>
+    <Orientation>Row</Orientation>
+    <Position>-1</Position>
+   </PivotField>
+   <PivotField>
+    <Name>$Resources:AuditReportTemplate_CountOfOccurred</Name>
+    <ParentField>$Resources:AuditReportTemplate_Occurred</ParentField>
+    <Orientation>Data</Orientation>
+    <Function>Count</Function>
+    <Position>1</Position>
+   </PivotField>
+   <PTLineItems>
+    <PTLineItem>
+     <Item>1</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <Item>1</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <ItemType>Grand</ItemType>
+     <Item>0</Item>
+    </PTLineItem>
+   </PTLineItems>
+   <PTLineItems>
+    <Orientation>Column</Orientation>
+    <PTLineItem>
+     <Item>0</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <Item>1</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <ItemType>Grand</ItemType>
+     <Item>0</Item>
+    </PTLineItem>
+   </PTLineItems>
+   <PTSource>
+    <CacheIndex>1</CacheIndex>
+    <RefreshOnFileOpen/>
+    <ConsolidationReference>
+     <FileName>audit.xml</FileName>
+     <Name>_data</Name>
+    </ConsolidationReference>
+   </PTSource>
+  </PivotTable>
+ </Worksheet>
+ <Worksheet ss:Name="_$Resources:AuditReportTemplate_DataWorksheetName">
+  <Table ss:ExpandedColumnCount="14" ss:ExpandedRowCount="5" x:FullColumns="1"
+   x:FullRows="1">
+   <Row>
+    <Cell><Data ss:Type="String">$Resources:AuditReportTemplate_SiteId</Data><NamedCell ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String">$Resources:AuditReportTemplate_ItemId</Data><NamedCell ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String">$Resources:AuditReportTemplate_ItemType</Data><NamedCell ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String">$Resources:AuditReportTemplate_UserId</Data><NamedCell ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String">$Resources:AuditReportTemplate_MachineName</Data><NamedCell ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String">$Resources:AuditReportTemplate_MachineIP</Data><NamedCell ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String">$Resources:AuditReportTemplate_DocLocation</Data><NamedCell ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String">$Resources:AuditReportTemplate_LocationType</Data><NamedCell ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String">$Resources:AuditReportTemplate_Occurred</Data><NamedCell ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String">$Resources:AuditReportTemplate_Event</Data><NamedCell ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String">$Resources:AuditReportTemplate_EventName</Data><NamedCell ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String">$Resources:AuditReportTemplate_EventSource</Data><NamedCell ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String">$Resources:AuditReportTemplate_SourceName</Data><NamedCell ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String">$Resources:AuditReportTemplate_EventData</Data><NamedCell ss:Name="_data"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">{00000000-0000-0000-0000-000000000000}</Data><NamedCell
+      ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String">{00000000-0000-0000-0000-000000000000}</Data><NamedCell
+      ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String">Document</Data><NamedCell ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String"></Data><NamedCell ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String"></Data><NamedCell ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String">DocLocation</Data><NamedCell
+      ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String">Url</Data><NamedCell ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String">1/1/1900 12:00:00 AM</Data><NamedCell
+      ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String">View</Data><NamedCell ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String"></Data><NamedCell ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String">SharePoint</Data><NamedCell ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String"></Data><NamedCell ss:Name="_data"/></Cell>
+    <Cell><Data ss:Type="String"></Data><NamedCell ss:Name="_data"/></Cell>
+   </Row>
+  </Table>
+ </Worksheet>
+</Workbook>

@@ -1,0 +1,120 @@
+<?xml version="1.0"?><!-- _lcid="1042" _version="14.0.4758" _dal="1" --><!-- _LocalBinding --><WorkflowConfig Version="14.0.0.3110">
+	<Template BaseID="{77C71F43-F403-484B-BCB2-303710E00412}" DocLibURL="_catalogs/wfpub" XomlHref="_catalogs/wfpub/서명 수집 - SharePoint 2010/Signatures_1042.xoml" XomlVersion="V1.0" AssociationURL="_layouts/CstWrkflIP.aspx" TaskContentType="0x01080100C9C9515DE4E24001905074F980F93160002E9DB43AC527439AB853AE4FC8360412" StartManually="true" Visibility="RootPublic" Category="List;Language:1042;#ContentType;Language:1042;#SigClientRequired" RestrictLanguage="1042" RulesHref="_catalogs/wfpub/서명 수집 - SharePoint 2010/Signatures_1042.xoml.rules" RulesVersion="V1.0" Description="Microsoft Office 문서를 완료하는 데 필요한 서명을 수집합니다." PreviewHref="/_catalogs/wfpub/서명 수집 - SharePoint 2010/Signatures_1042.vdw" ShowPreview="true" PreviewVersion="V1.0"/>
+	<ContentTypes>
+		<ContentType Name="Collect Signatures Workflow Task (ko-kr)" ContentTypeID="0x01080100C9C9515DE4E24001905074F980F93160002E9DB43AC527439AB853AE4FC8360412" WorkflowForm="/_catalogs/wfpub/서명 수집 - SharePoint 2010/Signatures_Task_1042.xsn" WorkflowFormVersion="V1.0" Description="사용자 또는 사용자 팀이 완료해야 하는 워크플로에서 생성되는 작업 항목입니다.">
+			<Fields/>
+			<WorkflowFormData>
+				<dfs:myFields xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dms="http://schemas.microsoft.com/office/2009/documentManagement/types" xmlns:dfs="http://schemas.microsoft.com/office/infopath/2003/dataFormSolution" xmlns:q="http://schemas.microsoft.com/office/infopath/2009/WSSList/queryFields" xmlns:d="http://schemas.microsoft.com/office/infopath/2009/WSSList/dataFields" xmlns:ma="http://schemas.microsoft.com/office/2009/metadata/properties/metaAttributes" xmlns:pc="http://schemas.microsoft.com/office/infopath/2007/PartnerControls" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+					<dfs:queryFields>
+					</dfs:queryFields>
+					<dfs:dataFields>
+						<d:SharePointListItem_RW>
+							<d:Status/>
+							<d:Author/>
+							<d:FieldName_ConsolidatedComments/>
+							<d:DueDate xsi:nil="true"/>
+							<d:FieldName_Comments/>
+							<d:SignatureID/>
+							<d:SignatureOrder/>
+							<d:RequiresSignature xsi:nil="true"/>
+							<d:FieldName_DelegateTo/>
+							<d:FieldName_NewDescription/>
+							<d:FieldName_NewSerialTaskDuration xsi:nil="true"/>
+							<d:FieldName_NewDurationUnits>Day</d:FieldName_NewDurationUnits>
+							<d:FieldName_RequestTo/>
+							<d:Body/>
+							<d:Title/>
+							<d:Priority>(2) Normal</d:Priority>
+							<d:PercentComplete xsi:nil="true"/>
+							<d:AssignedTo/>
+							<d:StartDate/>
+							<d:WorkflowLink Description=""/>
+							<d:OffsiteParticipant/>
+							<d:OffsiteParticipantReason/>
+							<d:WorkflowOutcome/>
+							<d:WorkflowName/>
+							<d:FormURN/>
+							<d:FormData/>
+							<d:EmailBody/>
+							<d:HasCustomEmailBody xsi:nil="true"/>
+							<d:SendEmailNotification xsi:nil="true"/>
+							<d:PendingModTime xsi:nil="true"/>
+							<d:Completed>false</d:Completed>
+							<d:ExtendedProperties/>
+							<d:ID xsi:nil="true"/>
+							<d:Modified xsi:nil="true"/>
+							<d:Created xsi:nil="true"/>
+							<d:Editor/>
+						</d:SharePointListItem_RW>
+					</dfs:dataFields>
+				</dfs:myFields>
+			</WorkflowFormData>
+		</ContentType>
+	</ContentTypes>
+	<Initiation URL="_layouts/IniWrkflIP.aspx">
+		<Fields>
+			<Field Name="Signers" GroupName="Assignment" FormType="Both" DisplayName="서명자" Type="HybridUser" Description="워크플로의 작업을 배정받을 사람의 이름을 입력하고 해당 작업의 배정 순서를 선택합니다. 이름은 세미콜론으로 구분합니다. 단계를 더 추가하여 다른 순서로 더 많은 사람에게 작업을 배정할 수도 있습니다." Direction="None" InsertButtonText="새 단계 추가">
+				<Default/>
+				<Field Name="Assignee" DisplayName="배정 대상" List="UserInfo" Description="" Width="305" Type="UserMulti" ShowField="ImnName" UserSelectionMode="PeopleAndGroups" UserSelectionScope="0" Direction="None"/>
+				<Field Name="Stage" DisplayName="단계" Description="" Width="1" Type="Number" Direction="None" Hidden="TRUE">
+					<Default></Default>
+				</Field>
+				<Field Name="AssignmentType" Format="Dropdown" BaseType="Text" DisplayName="순서" Description="" Width="150" Type="Choice" Direction="None">
+					<Default>Serial</Default>
+					<CHOICES>
+						<CHOICE DisplayName="한 번에 한 참석자씩(순차적)">Serial</CHOICE>
+						<CHOICE DisplayName="모든 참석자가 동시에 참석(동시)">Parallel</CHOICE>
+					</CHOICES>
+				</Field>
+				<Field Name="RequiresSignature" DisplayName="서명 필요" Description="" Width="1" Type="Boolean" Hidden="TRUE" HiddenWritable="TRUE" Direction="None">
+					<Default>1</Default>
+				</Field>
+				<Field Name="SignatureID" DisplayName="서명 ID" Description="" Width="1" Type="Text" Hidden="TRUE" HiddenWritable="TRUE" Direction="None"/>
+				<Field Name="SignatureOrder" DisplayName="서명 순서" Description="" Width="1" Type="Text" Hidden="TRUE" HiddenWritable="TRUE" Direction="None"/>
+			</Field>
+			<Field Name="CC" FormType="Both" List="UserInfo" ShowField="ImnName" UserSelectionMode="PeopleAndGroups" UserSelectionScope="0" DisplayName="참조" Description="워크플로를 시작하고 끝낼 때 작업을 배정하지 않고 이 사람들에게 알립니다." Direction="None" Type="UserMulti" Mult="TRUE"/>
+		</Fields>
+		<Parameters>
+			<Parameter Name="Signers" Type="System.String"/>
+			<Parameter Name="CC" Type="System.String"/>
+		</Parameters>
+		<DefaultData>
+			<dfs:myFields xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dms="http://schemas.microsoft.com/office/2009/documentManagement/types" xmlns:dfs="http://schemas.microsoft.com/office/infopath/2003/dataFormSolution" xmlns:q="http://schemas.microsoft.com/office/infopath/2009/WSSList/queryFields" xmlns:d="http://schemas.microsoft.com/office/infopath/2009/WSSList/dataFields" xmlns:ma="http://schemas.microsoft.com/office/2009/metadata/properties/metaAttributes" xmlns:pc="http://schemas.microsoft.com/office/infopath/2007/PartnerControls" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+				<dfs:queryFields>
+				</dfs:queryFields>
+				<dfs:dataFields>
+					<d:SharePointListItem_RW>
+						<d:Signers>
+							<d:Assignment>
+								<d:Assignee/>
+								<d:Stage xsi:nil="true"/>
+								<d:AssignmentType>Serial</d:AssignmentType>
+								<d:RequiresSignature>true</d:RequiresSignature>
+								<d:SignatureID/>
+								<d:SignatureOrder/>
+							</d:Assignment>
+						</d:Signers>
+						<d:CC/>
+					</d:SharePointListItem_RW>
+				</dfs:dataFields>
+			</dfs:myFields>
+		</DefaultData>
+	</Initiation>
+	<Extended>
+		<Fields/>
+	</Extended>
+	<MetaData>
+		<TaskForms/>
+		<Modifications ModificationUrl="_layouts/ModWrkflIP.aspx">
+			<Modification TypeId="a938eabe-8db1-45b9-87cb-b930728afe10" NameFormat="모든 {0} 작업 취소" FormURN="urn:schemas-microsoft-com:office:infopath:workflow:OOB-WrapItUp:1042"/>
+		</Modifications>
+		<Instantiation_FormURI Version="V1.0">/_catalogs/wfpub/서명 수집 - SharePoint 2010/Signatures_1042.xsn</Instantiation_FormURI>
+		<Association_FormURN Version="V1.0">/_catalogs/wfpub/서명 수집 - SharePoint 2010/Signatures_1042.xsn</Association_FormURN>
+		<SigClientSettings>DigitalSignaturesEnabled;#UseAssociationDataToSuggestedSigners</SigClientSettings>
+		<ExtendedStatusColumnValues>
+			<StatusColumnValue>취소됨</StatusColumnValue>
+			<StatusColumnValue>승인됨</StatusColumnValue>
+			<StatusColumnValue>거부됨</StatusColumnValue>
+		</ExtendedStatusColumnValues>
+	</MetaData>
+</WorkflowConfig>

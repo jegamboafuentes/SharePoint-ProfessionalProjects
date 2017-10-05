@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WebPart xmlns="http://schemas.microsoft.com/WebPart/v2">
+	<Assembly>Microsoft.SharePoint.Portal, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c</Assembly>
+	<TypeName>Microsoft.SharePoint.Portal.WebControls.SearchBoxEx</TypeName>
+	<Title>検索ボックス</Title>
+	<Description>ドキュメントとアイテムの検索に使用します。</Description>
+	<FrameType>None</FrameType> 
+	<AllowMinimize>true</AllowMinimize> 
+	<AllowRemove>true</AllowRemove> 
+	<IsVisible>true</IsVisible>
+	<Width>335px</Width>
+	<GoImageUrl xmlns="urn:schemas-microsoft-com:SearchBoxEx">/_layouts/images/gosearch.gif</GoImageUrl>
+	<GoImageUrlRTL  xmlns="urn:schemas-microsoft-com:SearchBoxEx">/_layouts/images/goRTL.gif</GoImageUrlRTL>
+	<GoImageActiveUrl xmlns="urn:schemas-microsoft-com:SearchBoxEx">/_layouts/images/gosearch.gif</GoImageActiveUrl>
+	<GoImageActiveUrlRTL  xmlns="urn:schemas-microsoft-com:SearchBoxEx">/_layouts/images/goRTL.gif</GoImageActiveUrlRTL> 
+
+</WebPart>

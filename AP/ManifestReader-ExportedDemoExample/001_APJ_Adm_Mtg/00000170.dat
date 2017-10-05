@@ -1,0 +1,120 @@
+<?xml version="1.0"?><!-- _lcid="2052" _version="14.0.4758" _dal="1" --><!-- _LocalBinding --><WorkflowConfig Version="14.0.0.3110">
+	<Template BaseID="{77C71F43-F403-484B-BCB2-303710E00804}" DocLibURL="_catalogs/wfpub" XomlHref="_catalogs/wfpub/收集签名 - SharePoint 2010/Signatures_2052.xoml" XomlVersion="V1.0" AssociationURL="_layouts/CstWrkflIP.aspx" TaskContentType="0x01080100C9C9515DE4E24001905074F980F93160002E9DB43AC527439AB853AE4FC8360804" StartManually="true" Visibility="RootPublic" Category="List;Language:2052;#ContentType;Language:2052;#SigClientRequired" RestrictLanguage="2052" RulesHref="_catalogs/wfpub/收集签名 - SharePoint 2010/Signatures_2052.xoml.rules" RulesVersion="V1.0" Description="收集完成 Microsoft Office 文档所需的签名。" PreviewHref="/_catalogs/wfpub/收集签名 - SharePoint 2010/Signatures_2052.vdw" ShowPreview="true" PreviewVersion="V1.0"/>
+	<ContentTypes>
+		<ContentType Name="Collect Signatures Workflow Task (zh-cn)" ContentTypeID="0x01080100C9C9515DE4E24001905074F980F93160002E9DB43AC527439AB853AE4FC8360804" WorkflowForm="/_catalogs/wfpub/收集签名 - SharePoint 2010/Signatures_Task_2052.xsn" WorkflowFormVersion="V1.0" Description="工作流创建的、您或您的团队需要完成的工作项目。">
+			<Fields/>
+			<WorkflowFormData>
+				<dfs:myFields xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dms="http://schemas.microsoft.com/office/2009/documentManagement/types" xmlns:dfs="http://schemas.microsoft.com/office/infopath/2003/dataFormSolution" xmlns:q="http://schemas.microsoft.com/office/infopath/2009/WSSList/queryFields" xmlns:d="http://schemas.microsoft.com/office/infopath/2009/WSSList/dataFields" xmlns:ma="http://schemas.microsoft.com/office/2009/metadata/properties/metaAttributes" xmlns:pc="http://schemas.microsoft.com/office/infopath/2007/PartnerControls" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+					<dfs:queryFields>
+					</dfs:queryFields>
+					<dfs:dataFields>
+						<d:SharePointListItem_RW>
+							<d:Status/>
+							<d:Author/>
+							<d:FieldName_ConsolidatedComments/>
+							<d:DueDate xsi:nil="true"/>
+							<d:FieldName_Comments/>
+							<d:SignatureID/>
+							<d:SignatureOrder/>
+							<d:RequiresSignature xsi:nil="true"/>
+							<d:FieldName_DelegateTo/>
+							<d:FieldName_NewDescription/>
+							<d:FieldName_NewSerialTaskDuration xsi:nil="true"/>
+							<d:FieldName_NewDurationUnits>Day</d:FieldName_NewDurationUnits>
+							<d:FieldName_RequestTo/>
+							<d:Body/>
+							<d:Title/>
+							<d:Priority>(2) Normal</d:Priority>
+							<d:PercentComplete xsi:nil="true"/>
+							<d:AssignedTo/>
+							<d:StartDate/>
+							<d:WorkflowLink Description=""/>
+							<d:OffsiteParticipant/>
+							<d:OffsiteParticipantReason/>
+							<d:WorkflowOutcome/>
+							<d:WorkflowName/>
+							<d:FormURN/>
+							<d:FormData/>
+							<d:EmailBody/>
+							<d:HasCustomEmailBody xsi:nil="true"/>
+							<d:SendEmailNotification xsi:nil="true"/>
+							<d:PendingModTime xsi:nil="true"/>
+							<d:Completed>false</d:Completed>
+							<d:ExtendedProperties/>
+							<d:ID xsi:nil="true"/>
+							<d:Modified xsi:nil="true"/>
+							<d:Created xsi:nil="true"/>
+							<d:Editor/>
+						</d:SharePointListItem_RW>
+					</dfs:dataFields>
+				</dfs:myFields>
+			</WorkflowFormData>
+		</ContentType>
+	</ContentTypes>
+	<Initiation URL="_layouts/IniWrkflIP.aspx">
+		<Fields>
+			<Field Name="Signers" GroupName="Assignment" FormType="Both" DisplayName="签署者" Type="HybridUser" Description="输入工作流将分配任务的人员的姓名，然后选择分配任务的顺序。请使用分号将其进行分隔。您也可以添加阶段以不同的顺序将任务分配给更多人。" Direction="None" InsertButtonText="添加新阶段">
+				<Default/>
+				<Field Name="Assignee" DisplayName="分配给" List="UserInfo" Description="" Width="305" Type="UserMulti" ShowField="ImnName" UserSelectionMode="PeopleAndGroups" UserSelectionScope="0" Direction="None"/>
+				<Field Name="Stage" DisplayName="阶段" Description="" Width="1" Type="Number" Direction="None" Hidden="TRUE">
+					<Default></Default>
+				</Field>
+				<Field Name="AssignmentType" Format="Dropdown" BaseType="Text" DisplayName="顺序" Description="" Width="150" Type="Choice" Direction="None">
+					<Default>Serial</Default>
+					<CHOICES>
+						<CHOICE DisplayName="一次一个(串行)">Serial</CHOICE>
+						<CHOICE DisplayName="一次全部(并行)">Parallel</CHOICE>
+					</CHOICES>
+				</Field>
+				<Field Name="RequiresSignature" DisplayName="所需签名" Description="" Width="1" Type="Boolean" Hidden="TRUE" HiddenWritable="TRUE" Direction="None">
+					<Default>1</Default>
+				</Field>
+				<Field Name="SignatureID" DisplayName="签名 ID" Description="" Width="1" Type="Text" Hidden="TRUE" HiddenWritable="TRUE" Direction="None"/>
+				<Field Name="SignatureOrder" DisplayName="签名顺序" Description="" Width="1" Type="Text" Hidden="TRUE" HiddenWritable="TRUE" Direction="None"/>
+			</Field>
+			<Field Name="CC" FormType="Both" List="UserInfo" ShowField="ImnName" UserSelectionMode="PeopleAndGroups" UserSelectionScope="0" DisplayName="抄送" Description="此工作流启动和结束时通知其他人员而不向其分配任务。" Direction="None" Type="UserMulti" Mult="TRUE"/>
+		</Fields>
+		<Parameters>
+			<Parameter Name="Signers" Type="System.String"/>
+			<Parameter Name="CC" Type="System.String"/>
+		</Parameters>
+		<DefaultData>
+			<dfs:myFields xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dms="http://schemas.microsoft.com/office/2009/documentManagement/types" xmlns:dfs="http://schemas.microsoft.com/office/infopath/2003/dataFormSolution" xmlns:q="http://schemas.microsoft.com/office/infopath/2009/WSSList/queryFields" xmlns:d="http://schemas.microsoft.com/office/infopath/2009/WSSList/dataFields" xmlns:ma="http://schemas.microsoft.com/office/2009/metadata/properties/metaAttributes" xmlns:pc="http://schemas.microsoft.com/office/infopath/2007/PartnerControls" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+				<dfs:queryFields>
+				</dfs:queryFields>
+				<dfs:dataFields>
+					<d:SharePointListItem_RW>
+						<d:Signers>
+							<d:Assignment>
+								<d:Assignee/>
+								<d:Stage xsi:nil="true"/>
+								<d:AssignmentType>Serial</d:AssignmentType>
+								<d:RequiresSignature>true</d:RequiresSignature>
+								<d:SignatureID/>
+								<d:SignatureOrder/>
+							</d:Assignment>
+						</d:Signers>
+						<d:CC/>
+					</d:SharePointListItem_RW>
+				</dfs:dataFields>
+			</dfs:myFields>
+		</DefaultData>
+	</Initiation>
+	<Extended>
+		<Fields/>
+	</Extended>
+	<MetaData>
+		<TaskForms/>
+		<Modifications ModificationUrl="_layouts/ModWrkflIP.aspx">
+			<Modification TypeId="a938eabe-8db1-45b9-87cb-b930728afe10" NameFormat="取消所有 {0} 任务" FormURN="urn:schemas-microsoft-com:office:infopath:workflow:OOB-WrapItUp:2052"/>
+		</Modifications>
+		<Instantiation_FormURI Version="V1.0">/_catalogs/wfpub/收集签名 - SharePoint 2010/Signatures_2052.xsn</Instantiation_FormURI>
+		<Association_FormURN Version="V1.0">/_catalogs/wfpub/收集签名 - SharePoint 2010/Signatures_2052.xsn</Association_FormURN>
+		<SigClientSettings>DigitalSignaturesEnabled;#UseAssociationDataToSuggestedSigners</SigClientSettings>
+		<ExtendedStatusColumnValues>
+			<StatusColumnValue>已取消</StatusColumnValue>
+			<StatusColumnValue>已批准</StatusColumnValue>
+			<StatusColumnValue>已拒绝</StatusColumnValue>
+		</ExtendedStatusColumnValues>
+	</MetaData>
+</WorkflowConfig>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WebPart xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/WebPart/v2">
+  <Title>ステータス リスト</Title>
+  <FrameType>Default</FrameType>
+  <Description>ステータス インジケータのリストを表示します。ステータス インジケータは組織にとって重要な指標を表示し、目標に対する組織の対応状態を示します。</Description>
+  <IsIncluded>true</IsIncluded>
+  <PartOrder>1</PartOrder>
+  <FrameState>Normal</FrameState>
+  <Height />
+  <Width />
+  <AllowRemove>true</AllowRemove>
+  <AllowZoneChange>true</AllowZoneChange>
+  <AllowMinimize>true</AllowMinimize>
+  <IsVisible>true</IsVisible>
+  <DetailLink />
+  <HelpLink />
+  <Dir>Default</Dir>
+  <PartImageSmall />
+  <MissingAssembly />
+  <PartImageLarge></PartImageLarge>
+  <IsIncludedFilter />
+  <Assembly>Microsoft.SharePoint.Portal, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c</Assembly> 
+  <TypeName>Microsoft.SharePoint.Portal.WebControls.KPIListWebPart</TypeName>
+  <PartImageSmall>/_layouts/images/KpiListWP.gif</PartImageSmall>
+  <PartImageLarge>/_layouts/images/KpiListWP.gif</PartImageLarge>
+</WebPart>

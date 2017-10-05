@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<webParts>
+  <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+    <metaData>
+      <type name="AirProducts.KM.APShare.WebParts.DocLibLister.DocLibLister, 
+			AirProducts.KM.APShare.WebParts.DocLibLister, 
+			Version=1.0.0.0, 
+			Culture=neutral, 
+			PublicKeyToken=c5642ae03e6e1455" 
+		/>
+      <importErrorMessage>Cannot import this Web Part.</importErrorMessage>
+    </metaData>
+    <data>
+      <properties>
+        <property name="Title" type="string">List of Document Libraries</property>
+        <property name="Description" type="string">List of all Document Libraries on your site.</property>
+      </properties>
+    </data>
+  </webPart>
+</webParts>
