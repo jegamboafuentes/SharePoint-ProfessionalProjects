@@ -1,0 +1,9 @@
+c:\users\gamboaj\documents\visual studio 2015\Projects\ManifestReaderForms0\ManifestReaderForms0\bin\Debug\ManifestReaderForms0.exe.config
+c:\users\gamboaj\documents\visual studio 2015\Projects\ManifestReaderForms0\ManifestReaderForms0\bin\Debug\ManifestReaderForms0.exe
+c:\users\gamboaj\documents\visual studio 2015\Projects\ManifestReaderForms0\ManifestReaderForms0\bin\Debug\ManifestReaderForms0.pdb
+c:\users\gamboaj\documents\visual studio 2015\Projects\ManifestReaderForms0\ManifestReaderForms0\obj\Debug\ManifestReaderForms0.csprojResolveAssemblyReference.cache
+c:\users\gamboaj\documents\visual studio 2015\Projects\ManifestReaderForms0\ManifestReaderForms0\obj\Debug\ManifestReaderForms0.Properties.Resources.resources
+c:\users\gamboaj\documents\visual studio 2015\Projects\ManifestReaderForms0\ManifestReaderForms0\obj\Debug\ManifestReaderForms0.csproj.GenerateResource.Cache
+c:\users\gamboaj\documents\visual studio 2015\Projects\ManifestReaderForms0\ManifestReaderForms0\obj\Debug\ManifestReaderForms0.exe
+c:\users\gamboaj\documents\visual studio 2015\Projects\ManifestReaderForms0\ManifestReaderForms0\obj\Debug\ManifestReaderForms0.pdb
+c:\users\gamboaj\documents\visual studio 2015\Projects\ManifestReaderForms0\ManifestReaderForms0\obj\Debug\ManifestReaderForms0.Form1.resources

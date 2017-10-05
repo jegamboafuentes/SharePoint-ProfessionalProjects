@@ -1,0 +1,590 @@
+<html>
+
+<head>
+    <title>Collaboration Team Site</title>
+    <style>
+        #DeltaPlaceHolderPageTitleInTitleArea {
+            display: none;
+        }
+        
+        #Titlerow{
+            display: none;
+        }
+        
+        /* ---------- Fancy Title ---------- */
+        
+        h1.flag {
+            white-space: nowrap;
+            font-size: 2vw;
+            position: relative;
+            cursor: default;
+        }
+        /* Each letter */
+        
+        h1.flag span {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            display: inline-block;
+            width: 3em;
+            padding-top: 0.8em;
+            padding-bottom: 0.8em;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            -webkit-transition: all 1s cubic-bezier(0.0, 0.0, 0.2, 1);
+            transition: all 1s cubic-bezier(0.0, 0.0, 0.2, 1);
+        }
+        /* Solid Surface */
+        
+        h1.flag span:before {
+            content: '';
+            background-color: #F9F8EF;
+            -webkit-transition: all 1s cubic-bezier(0.0, 0.0, 0.2, 1);
+            transition: all 1s cubic-bezier(0.0, 0.0, 0.2, 1);
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: -1;
+        }
+        /* Odd letters */
+        
+        h1.flag span:nth-child(odd) {
+            -webkit-transform: skewY(-8deg);
+            transform: skewY(-8deg);
+            color: rgb(144, 140, 140);
+            background: -webkit-linear-gradient(120deg, rgb(255, 255, 255), rgb(237, 236, 227));
+            background: linear-gradient(-30deg, rgb(255, 255, 255), rgb(237, 236, 227));
+            box-shadow: inset -1px 0 0px rgba(255, 255, 255, .3);
+            prospective: 1000px;
+        }
+        /* Even letters */
+        
+        h1.flag span:nth-child(even) {
+            -webkit-transform: skewY(8deg);
+            transform: skewY(8deg);
+            color: rgb(94, 86, 86);
+            background: -webkit-linear-gradient(3deg, rgb(199, 198, 191), rgb(237, 236, 227));
+            background: linear-gradient(87deg, rgb(199, 198, 191), rgb(237, 236, 227));
+            box-shadow: inset -1px 0 0px rgba(0, 0, 0, .05);
+            prospective: 1000px;
+        }
+        /* Paper border-radius */
+        
+        h1.flag span:first-of-type,
+        h1.flag span:first-of-type:before {
+            border-radius: 4px 0 0 4px;
+        }
+        
+        h1.flag span:last-of-type,
+        h1.flag span:last-of-type:before {
+            border-radius: 0 4px 4px 0;
+        }
+        /* Hover interaction */
+        
+        h1.flag:hover:before {
+            opacity: 0.5;
+            filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="2" /></filter></svg>#filter');
+            -webkit-filter: blur(2px);
+            filter: blur(2px);
+            left: 1%;
+            width: 98%;
+        }
+        
+        h1.flag:hover span {
+            -webkit-transform: none;
+            transform: none;
+            color: #C5BEAA;
+            box-shadow: none;
+            -webkit-transition-duration: 200ms;
+            transition-duration: 200ms;
+            width: 3.1em;
+        }
+        
+        h1.flag:hover span:before {
+            opacity: 1;
+            -webkit-transition-duration: 200ms;
+            transition-duration: 200ms;
+        }
+        /* ---------- Fancy Title ---------- */
+        /* ---------- Img ---------- */
+        
+        .hover14 figure {
+            position: relative;
+        }
+        
+        .hover14 figure::before {
+            position: absolute;
+            top: 0;
+            left: -75%;
+            z-index: 2;
+            display: block;
+            content: '';
+            width: 50%;
+            height: 100%;
+            background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .3) 100%);
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .3) 100%);
+            -webkit-transform: skewX(-25deg);
+            transform: skewX(-25deg);
+        }
+        
+        .hover14 figure:hover::before {
+            -webkit-animation: shine .75s;
+            animation: shine .75s;
+        }
+        
+        @-webkit-keyframes shine {
+            100% {
+                left: 125%;
+            }
+        }
+        
+        @keyframes shine {
+            100% {
+                left: 125%;
+            }
+        }
+        /* ---------- Img ---------- */
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css"> </head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    <nav class="navbar navbar-inverse bg-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll"> <a class="navbar-brand page-scroll" href="https://approd.sharepoint.com/teams/CollabTeam/SitePages/Home.aspx">Collaboration Team</a> </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="hidden">
+                        <a class="page-scroll" href="#page-top"></a>
+                    </li>
+                    <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#">APShare<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="https://approd.sharepoint.com/teams/CollabTeam/APShare/SharePoint2010/SitePages/Home.aspx">SP2010 Documentation</a> </li>
+                            <li><a href="https://approd.sharepoint.com/teams/CollabTeam/APShare/SP2013/default.aspx">SP2013 Upgrade (Phase1)</a></li>
+                            <li><a href="https://approd.sharepoint.com/teams/CollabTeam/APShare/SP2013P2/default.aspx">SP2013 Upgrade (Phase2)</a></li>
+                            <li><a href="https://approd.sharepoint.com/teams/CollabTeam/Consulting/SitePages/Home.aspx">Consluting</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#">Computer Aid<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="http://apshare.apci.com/sites/ITCentral/SiteDirectory/ASD/AD/ADMOutSrc/Lists/Team%20Calendar/ADM%20Calendar.aspx">CAI Calendar</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#">O365 Management<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="https://approd.sharepoint.com/teams/CollabTeam/Yammer/SitePages/Home.aspx">Yammer</a> </li>
+                            <li><a href="https://approd.sharepoint.com/teams/CollabTeam/Consulting/SitePages/Home.aspx">Consluting</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#">SharePoint Apps<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="https://approd.sharepoint.com/teams/CollabTeam/SPApps/CNAPHome/SitePages/Home.aspx">CorpNEWS/APOnline HomePage</a> </li>
+                            <li><a href="https://approd.sharepoint.com/teams/CollabTeam/Consulting/SitePages/Home.aspx">Consluting</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#">Utilities<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="https://approd.sharepoint.com/teams/CollabTeam/Utilities/ContentType/SitePages/Home.aspx">Content Type</a> </li>
+                            <li><a href="https://approd.sharepoint.com/teams/CollabTeam/Utilities/SiteCreate/SitePages/Home.aspx">Site Creation</a></li>
+                            <li><a href="https://approd.sharepoint.com/teams/CollabTeam/Utilities/SiteQuota/SitePages/Home.aspx">Site Quota</a></li>
+                            <li><a href="https://approd.sharepoint.com/teams/CollabTeam/Utilities/SPFirecall/SitePages/Home.aspx">SPFirecall</a></li>
+                            <li><a href="https://approd.sharepoint.com/teams/CollabTeam/Consulting/SitePages/Home.aspx">Consluting</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h1 class="flag">Collaboration</h1></div>
+        <div class="col-lg-12 text-center">
+            <h1 class="flag">Team</h1></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <!--        <div class="col-lg-4"><img src="https://approd.sharepoint.com/teams/CollabTeam/SiteAssets/SitePages/Home/CollabTeam%20Image.png" class="img-fluid" alt="Responsive image"></div>-->
+        <div class="col-lg-4">
+            <div class="hover14 column">
+                <div>
+                    <figure><img src="img.png" class="img-fluid" alt="img-thumbnail" width="400" height="auto"></figure>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-4 text-center">
+            <div class="list-group"> <a class="list-group-item active">Sites Directory <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a> <a href="https://approd.sharepoint.com/teams/CollabTeam/APShare/SitePages/Home.aspx" class="list-group-item">APShare <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a> <a href="https://approd.sharepoint.com/teams/CollabTeam/Yammer/SitePages/Home.aspx" class="list-group-item">Yammer <span class="glyphicon glyphicon-th" aria-hidden="true"></span></a> <a href="https://approd.sharepoint.com/teams/CollabTeam/Compliance/SitePages/Home.aspx" class="list-group-item">Compilance <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a> <a href="https://approd.sharepoint.com/teams/CollabTeam/CAI/SitePages/Home.aspx" class="list-group-item">Computer Aid <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span></a> <a href="https://approd.sharepoint.com/teams/CollabTeam/Compliance/SitePages/Home.aspx" class="list-group-item">Compilance <span class="glyphicon glyphicon-flag" aria-hidden="true"></span></a> <a href="https://approd.sharepoint.com/teams/CollabTeam/Utilities/SitePages/Home.aspx" class="list-group-item">Utilities <span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a> <a href="https://approd.sharepoint.com/teams/CollabTeam/O365Mgmt/SitePages/Home.aspx" class="list-group-item">O365 Feautures Managment <span class="glyphicon glyphicon-cloud" aria-hidden="true"></span></a> <a href="https://approd.sharepoint.com/teams/CollabTeam/SPApps/SitePages/Home.aspx" class="list-group-item">SharePoint Apps <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span></a> <a href="https://approd.sharepoint.com/teams/CollabTeam/Consulting/SitePages/Home.aspx" class="list-group-item">Consulting <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span></a> </div>
+        </div>
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-4 text-center">
+            <!--            Fy17-->
+            <div class="panel panel-default">
+                <div class="panel-heading">FY17 Charge Numbers</div>
+                <div class="panel-body">
+                    <!--        acordeon-->
+                    <div class="bs-example">
+                        <div class="panel-group" id="accordion">
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">NumberType : Project (3)</a>
+                </h4> </div>
+                                <div id="collapseOne" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <table class="table table-condensed">
+                                            <thead>
+                                                <tr>
+                                                    <th>Title</th>
+                                                    <th>Network/Act Code</th>
+                                                    <th>ApCode</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Evonik SP/flieshare MIgrations</td>
+                                                    <td>20033167 0040 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>SP2013 User Interface Upgrade project</td>
+                                                    <td>20033294 0010</td>
+                                                    <td>PRJ0011655</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>WK3796 MT: 0365 Tenant Creation</td>
+                                                    <td>20034350 0060</td>
+                                                    <td>PRJ10859</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel panel-danger">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">NumberType : Std Activity (29)</a>
+                </h4> </div>
+                                <div id="collapseTwo" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <table class="table table-condensed">
+                                            <thead>
+                                                <tr>
+                                                    <th>Title</th>
+                                                    <th>Network/Act Code</th>
+                                                    <th>ApCode</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Chg Mgmt</td>
+                                                    <td>20033624 0030 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Consult</td>
+                                                    <td>20033624 0085 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Incident Mgmt</td>
+                                                    <td>20033624 0010 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Prob Mgmt</td>
+                                                    <td>20033624 0065 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Product Mgmt</td>
+                                                    <td>20033624 0032 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Chg Mgmt</td>
+                                                    <td>20033624 0030 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Consult</td>
+                                                    <td>20033624 0085 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Incident Mgmt</td>
+                                                    <td>20033624 0010 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Prob Mgmt</td>
+                                                    <td>20033624 0065 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Product Mgmt</td>
+                                                    <td>20033624 0032 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Chg Mgmt</td>
+                                                    <td>20033624 0030 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Consult</td>
+                                                    <td>20033624 0085 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Incident Mgmt</td>
+                                                    <td>20033624 0010 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Prob Mgmt</td>
+                                                    <td>20033624 0065 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Product Mgmt</td>
+                                                    <td>20033624 0032 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Chg Mgmt</td>
+                                                    <td>20033624 0030 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Consult</td>
+                                                    <td>20033624 0085 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Incident Mgmt</td>
+                                                    <td>20033624 0010 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Prob Mgmt</td>
+                                                    <td>20033624 0065 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Product Mgmt</td>
+                                                    <td>20033624 0032 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Chg Mgmt</td>
+                                                    <td>20033624 0030 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Consult</td>
+                                                    <td>20033624 0085 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Incident Mgmt</td>
+                                                    <td>20033624 0010 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Prob Mgmt</td>
+                                                    <td>20033624 0065 </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APOnlineShare/SharePoint - Product Mgmt</td>
+                                                    <td>20033624 0032 </td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">expandNumberType : Work Request (20)</a>
+                </h4> </div>
+                                <div id="collapseThree" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <table class="table table-condensed">
+                                            <thead>
+                                                <tr>
+                                                    <th>Title</th>
+                                                    <th>Network/Act Code</th>
+                                                    <th>ApCode</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Collab: Research for mobile EAR</td>
+                                                    <td>20033413 0010</td>
+                                                    <td>WREQ0011180</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Collab: InfoPath replacement research</td>
+                                                    <td>20033413 0020</td>
+                                                    <td>WREQ0011251</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Collab: Bamboo Replacement</td>
+                                                    <td>20033413 0030</td>
+                                                    <td>WREQ0011327</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Collab: IT SharePoint Org Lead</td>
+                                                    <td>20033413 0040</td>
+                                                    <td>WREQ0011339</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Collab: Research for mobile EAR</td>
+                                                    <td>20033413 0010</td>
+                                                    <td>WREQ0011180</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Collab: InfoPath replacement research</td>
+                                                    <td>20033413 0020</td>
+                                                    <td>WREQ0011251</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Collab: Bamboo Replacement</td>
+                                                    <td>20033413 0030</td>
+                                                    <td>WREQ0011327</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Collab: IT SharePoint Org Lead</td>
+                                                    <td>20033413 0040</td>
+                                                    <td>WREQ0011339</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Collab: Research for mobile EAR</td>
+                                                    <td>20033413 0010</td>
+                                                    <td>WREQ0011180</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Collab: InfoPath replacement research</td>
+                                                    <td>20033413 0020</td>
+                                                    <td>WREQ0011251</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Collab: Bamboo Replacement</td>
+                                                    <td>20033413 0030</td>
+                                                    <td>WREQ0011327</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Collab: IT SharePoint Org Lead</td>
+                                                    <td>20033413 0040</td>
+                                                    <td>WREQ0011339</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Collab: Research for mobile EAR</td>
+                                                    <td>20033413 0010</td>
+                                                    <td>WREQ0011180</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Collab: InfoPath replacement research</td>
+                                                    <td>20033413 0020</td>
+                                                    <td>WREQ0011251</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Collab: Bamboo Replacement</td>
+                                                    <td>20033413 0030</td>
+                                                    <td>WREQ0011327</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Collab: IT SharePoint Org Lead</td>
+                                                    <td>20033413 0040</td>
+                                                    <td>WREQ0011339</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Collab: Research for mobile EAR</td>
+                                                    <td>20033413 0010</td>
+                                                    <td>WREQ0011180</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Collab: InfoPath replacement research</td>
+                                                    <td>20033413 0020</td>
+                                                    <td>WREQ0011251</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Collab: Bamboo Replacement</td>
+                                                    <td>20033413 0030</td>
+                                                    <td>WREQ0011327</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Collab: IT SharePoint Org Lead</td>
+                                                    <td>20033413 0040</td>
+                                                    <td>WREQ0011339</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Collab: Research for mobile EAR</td>
+                                                    <td>20033413 0010</td>
+                                                    <td>WREQ0011180</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Collab: InfoPath replacement research</td>
+                                                    <td>20033413 0020</td>
+                                                    <td>WREQ0011251</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Collab: Bamboo Replacement</td>
+                                                    <td>20033413 0030</td>
+                                                    <td>WREQ0011327</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Collab: IT SharePoint Org Lead</td>
+                                                    <td>20033413 0040</td>
+                                                    <td>WREQ0011339</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--        acordeon-->
+                </div>
+            </div>
+            <!--            FY17-->
+            <div class="panel panel-default">
+                <div class="panel-heading">Important Links</div>
+                <div class="panel-body">
+                    <div class="list-group">  
+                        <a href="http://us5611filp/adtools/searchad.aspx" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-link" aria-hidden="true"></span> AD - ERN Tool</a>
+                        <a href="http://apshare.apci.com/sites/glossary/_layouts/15/AccessDenied.aspx?Source=http%3A%2F%2Fapshare%2Eapci%2Ecom%2Fsites%2Fglossary%2Fdefault%2Easpx" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-link" aria-hidden="true"></span> AP Enterprise Glossary</a>
+                        <a href="https://aponline.dev-sp.apci.com/Pages/Americas.aspx" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-link" aria-hidden="true"></span> APOnline - DEV</a>
+                        <a href="http://int-aponline.apci.com/Allentown/default.aspx" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-link" aria-hidden="true"></span> APOnline - INTEG</a>
+                        <a href="https://ca2013.sp.apci.com:1818/_layouts/axceler/xcmain.aspx" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-link" aria-hidden="true"></span> ControlPoint</a>
+                        <a href="http://apshare.apci.com/sites/ITCentral/SiteDirectory/ASD/DevCentral/Support/Server%20Groupings.aspx" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-link" aria-hidden="true"></span> Dev Central Server Listings</a>
+                        <a href="https://approd.sharepoint.com/teams/CollabTeam/Lists/ImpLinks/AllItems.aspx" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-record" aria-hidden="true"></span> (More Links...)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-1"> </div>
+    </div>
+    <div class="col-lg-4"></div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/davatron5000/Lettering.js/5a4897f9/jquery.lettering.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".flag").lettering();
+        });
+    </script>
+</body>
+
+</html>
