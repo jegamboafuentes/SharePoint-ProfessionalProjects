@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<webParts>
+  <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+    <metaData>
+      <type name="Microsoft.Office.Server.Search.WebControls.TopFederatedResultsWebPart, Microsoft.Office.Server.Search,Version=12.0.0.0,Culture=neutral,PublicKeyToken=71e9bce111e9429c" />
+      <importErrorMessage>Cannot import this Web Part.</importErrorMessage>
+    </metaData>
+    <data>	
+      <properties>
+        <property name="Title" type="string">上位フェデレーション検索結果</property>
+        <property name="Description" type="string">この Web パーツは、構成した場所での上位フェデレーション検索結果を表示します。</property>
+        <property name="ChromeType">None</property>
+        <property name="AllowMinimize" type="bool">true</property>
+        <property name="AllowClose" type="bool">true</property> 					
+        <property name="Hidden" type="bool">false</property>     
+        <property name="ResultsPerPage" type="int">1</property>
+     </properties>
+</data>
+</webPart>
+</webParts>
+

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserGroupMap xmlns="urn:deployment-usergroupmap-schema">
+    <Users>
+        <User Id="1" Name="APOnline Share" Login="i:0#.w|america\apshare" Email="APSHARE@airproducts.com" IsDomainGroup="false" IsSiteAdmin="false" SystemId="aTowKS53fHMtMS01LTIxLTIwNzI5NzQxMzMtMTQyNTM2NTc4Mi02Njc2NDY3OTEtMTQyNjUy" IsDeleted="false" Flags="0" />
+        <User Id="7" Name="Kawatsu,Hiroyuki" Login="i:0#.w|asiapac\kawatsh" Email="Hiroyuki.Kawatsu@versummaterials.com" IsDomainGroup="false" IsSiteAdmin="false" SystemId="aTowKS53fHMtMS01LTIxLTQzNzMwMjIxNS0yMzcwNTIxODI4LTI3MTMwMjI2NDAtNzkyNjA=" IsDeleted="false" Flags="0" />
+        <User Id="8" Name="Iida,Minami" Login="i:0#.w|asiapac\iidam" Email="Minami.Iida@versummaterials.com" IsDomainGroup="false" IsSiteAdmin="false" SystemId="aTowKS53fHMtMS01LTIxLTQzNzMwMjIxNS0yMzcwNTIxODI4LTI3MTMwMjI2NDAtNjgzMzY=" IsDeleted="false" MobilePhone="+81(80)9028x4065" Flags="0" />
+        <User Id="13" Name="Yamamoto,Tetsuya" Login="i:0#.w|asiapac\yamamot" Email="YAMAMOT@airproducts.com" IsDomainGroup="false" IsSiteAdmin="false" SystemId="aTowKS53fHMtMS01LTIxLTQzNzMwMjIxNS0yMzcwNTIxODI4LTI3MTMwMjI2NDAtMzI2NDc=" IsDeleted="false" Flags="0" />
+        <User Id="14" Name="Terasaki,Koji" Login="i:0#.w|asiapac\terasak" Email="TERASAK@airproducts.com" IsDomainGroup="false" IsSiteAdmin="false" SystemId="aTowKS53fHMtMS01LTIxLTQzNzMwMjIxNS0yMzcwNTIxODI4LTI3MTMwMjI2NDAtNjg5MjI=" IsDeleted="false" MobilePhone="+81(80)35152690" Flags="0" />
+        <User Id="15" Name="Tajiri,Tetsuya" Login="i:0#.w|asiapac\tajirit1" Email="TAJIRIT1@airproducts.com" IsDomainGroup="false" IsSiteAdmin="false" SystemId="aTowKS53fHMtMS01LTIxLTQzNzMwMjIxNS0yMzcwNTIxODI4LTI3MTMwMjI2NDAtNzQ1NTY=" IsDeleted="false" Flags="0" />
+        <User Id="16" Name="Ishida,Toshihito" Login="ASIAPAC\ishidat" Email="ISHIDAT@airproducts.com" IsDomainGroup="false" IsSiteAdmin="false" SystemId="AQUAAAAAAAUVAAAAx7MQGuRKS42wcLWhWQUAAA==" IsDeleted="true" Flags="0" />
+        <User Id="17" Name="Hakuya,Keisuke" Login="i:0#.w|asiapac\hakuyak" Email="HAKUYAK@airproducts.com" IsDomainGroup="false" IsSiteAdmin="false" SystemId="aTowKS53fHMtMS01LTIxLTQzNzMwMjIxNS0yMzcwNTIxODI4LTI3MTMwMjI2NDAtMjYwMzQ=" IsDeleted="false" Flags="0" />
+        <User Id="18" Name="Matsuzaka,Akihiro" Login="i:0#.w|asiapac\matsuza" Email="Akihiro.Matsuzaka@versummaterials.com" IsDomainGroup="false" IsSiteAdmin="false" SystemId="aTowKS53fHMtMS01LTIxLTQzNzMwMjIxNS0yMzcwNTIxODI4LTI3MTMwMjI2NDAtODEwODA=" IsDeleted="false" Flags="0" />
+        <User Id="22" Name="Masuzawa,Nobuo" Login="i:0#.w|asiapac\masuzan" Email="MASUZAN@airproducts.com" IsDomainGroup="false" IsSiteAdmin="false" SystemId="aTowKS53fHMtMS01LTIxLTQzNzMwMjIxNS0yMzcwNTIxODI4LTI3MTMwMjI2NDAtMjYwNjM=" IsDeleted="false" Flags="0" />
+    </Users>
+    <Groups>
+        <Group Id="3" Name="表示者" Description="このグループのメンバはページ、リスト アイテム、ドキュメントを表示できます。サーバー レンダリングが有効になっているドキュメントは、サーバー レンダリングの使用によってのみ表示できます。" Owner="1073741823" OwnerIsUser="true" OnlyAllowMembersViewMembership="true" />
+        <Group Id="4" Name="APJ Administration Members Meeting の所有者" Description="このグループを使用して、SharePoint サイト &lt;a href=&quot;http://apshare.apci.com/sites/APJ_Adm_Mtg/&quot;&gt;APJ Administration Members Meeting&lt;/a&gt; に対するフル コントロール権限を付与します。" Owner="4" OwnerIsUser="false" RequestToJoinLeaveEmailSetting="KAWATSH@airproducts.com">
+            <Member UserId="7" />
+            <Member UserId="8" />
+        </Group>
+        <Group Id="5" Name="APJ Administration Members Meeting の閲覧者" Description="このグループを使用して、SharePoint サイト &lt;a href=&quot;http://apshare.apci.com/sites/APJ_Adm_Mtg/&quot;&gt;APJ Administration Members Meeting&lt;/a&gt; に対する読み取り権限を付与します。" Owner="4" OwnerIsUser="false" RequestToJoinLeaveEmailSetting="KAWATSH@airproducts.com" />
+        <Group Id="6" Name="APJ Administration Members Meeting のメンバ" Description="このグループは、SharePoint サイト &lt;a href=&quot;http://apshare.apci.com/sites/APJ_Adm_Mtg/&quot;&gt;APJ Administration Members Meeting&lt;/a&gt; に対する投稿権限を付与されたグループです。" Owner="4" OwnerIsUser="false" RequestToJoinLeaveEmailSetting="KAWATSH@airproducts.com">
+            <Member UserId="7" />
+            <Member UserId="8" />
+            <Member UserId="13" />
+            <Member UserId="14" />
+            <Member UserId="15" />
+            <Member UserId="17" />
+            <Member UserId="18" />
+            <Member UserId="22" />
+            <Member UserId="33" />
+        </Group>
+    </Groups>
+</UserGroupMap>

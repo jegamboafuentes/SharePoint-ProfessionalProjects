@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<WebPart xmlns="http://schemas.microsoft.com/WebPart/v2">
-	<Assembly>Microsoft.SharePoint.Portal, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c</Assembly>
-	<TypeName>Microsoft.SharePoint.Portal.WebControls.ContactFieldControl</TypeName>
-	<Title>連絡先の詳細</Title>
-	<Description>このページまたはサイトの連絡先に関する詳細を表示するために使用します。</Description>
-	<PartImageLarge>/_layouts/images/wp_pers.gif</PartImageLarge>
-</WebPart>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<webParts>
+  <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+    <metaData>
+      <type name="Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart, Microsoft.SharePoint.Publishing,Version=12.0.0.0,Culture=neutral,PublicKeyToken=71e9bce111e9429c" />
+      <importErrorMessage>この Web パーツはインポートできません。</importErrorMessage>
+    </metaData>
+    <data>
+      <properties>
+		<property name="Title" type="string">トップ サイト</property>
+		<property name="Description" type="string">サイト ディレクトリのトップ サイトを表示します</property>
+        <property name="ChromeType">None</property>
+        <property name="ListsOverride" type="string"><![CDATA[<Lists ServerTemplate="300"><List Id="{0}" /></Lists>]]></property>
+        <property name="ItemStyle" type="string">Bullets</property>
+        <property name="XslLink" type="string">/Style Library/XSL Style Sheets/ContentQueryMain.xsl</property>
+        <property name="CommonViewFields" type="string">URL,URL;Description,Note</property>        
+        <property name="DataColumnRenames" type="string">URL,LinkUrl;Description,LinkToolTip</property>
+	<property name="QueryOverride" type="string"><![CDATA[<Where><Eq><FieldRef Name="TopSite" /><Value Type="Boolean">1</Value></Eq></Where>]]></property>
+        <property name="FilterField1" type="string">{fdc3b2ed-5bf2-4835-a4bc-b885f3396a61}</property>
+        <property name="FilterOperator1" type="Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart+FilterFieldQueryOperator,Microsoft.SharePoint.Publishing,Version=12.0.0.0,Culture=neutral,PublicKeyToken=71e9bce111e9429c">Eq</property>
+        <property name="FilterValue1" type="string">Approved</property>
+      </properties>
+    </data>
+  </webPart>
+</webParts>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>PMO Solution</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Copy metadata webpart </h3> </div>
+                    <div class="panel-body">
+                        <!--                        -----------Step1------------>
+                        <form>
+                            <h4>Step 1:</h4>
+                            <div class="form-group">
+                                <div>
+                                    <label for="SiteA">Site A</label>
+                                    <input type="text" class="form-control" id="sitea" aria-describedby="libraryHelp" placeholder="http://apshare.apci.com/sites/YourSite"> <small id="libraryHelp" class="form-text text-muted">Enter the URL of the site, where your Library/Document library is located.</small> </div>
+                                <div>
+                                    <label for="LibraryA">Library A</label>
+                                    <input type="text" class="form-control" id="librarya" aria-describedby="libraryHelp" placeholder="myList"> <small id="libraryHelp" class="form-text text-muted">Enter the name of your Library/Document Library.</small> </div>
+                                <!-- /input-group -->
+                                <button class="btn btn-success" type="button" onclick="verifyList()">Verify</button>
+                            </div>
+                        </form>
+                        <form>
+                            <div> Items/Documents found: <span id=itemsFound></span> </div>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Columns to copy</th>
+                                        <th>
+                                            <button id="addMoreColumns" class="btn btn-primary" type="button" id="anotherColumn" onclick="addColumns()" disabled=true><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                            <button id="verifyColumns" class="btn btn-success" type="button" disabled=true onclick="readColumns()">Verify</button>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="columTable"> </tbody>
+                            </table>
+                        </form>
+                        <!--                        -----------Step1------------>
+                        <!--                        -----------Step2------------>
+                        <form>
+                            <h4>Step 2:</h4>
+                            <div class="form-group">
+                                <div>
+                                    <label for="SiteA">Site B</label>
+                                    <input type="text" class="form-control" id="sitea" aria-describedby="libraryHelp" placeholder="http://apshare.apci.com/sites/YourSite" disabled=true> <small id="libraryHelp" class="form-text text-muted">Enter the URL of the site, where your Library/Document library is located.</small> </div>
+                                <div>
+                                    <label for="LibraryA">Library B</label>
+                                    <input type="text" class="form-control" id="librarya" aria-describedby="libraryHelp" placeholder="myList" disabled=true> <small id="libraryHelp" class="form-text text-muted">Enter the name of your Library/Document Library.</small> </div>
+                                <!-- /input-group -->
+                                <button class="btn btn-success" type="button" disabled=true>Verify</button>
+                            </div>
+                        </form>
+                        <form>
+                            <div> Items/Documents found: <span id=itemsFound></span> </div>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Columns to copy</th>
+                                        <th>
+                                            <button id="addMoreColumns" class="btn btn-primary" type="button" id="anotherColumn" disabled=true><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                            <button id="verifyColumns" class="btn btn-success" type="button" disabled=true>Verify</button>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="columTable"> </tbody>
+                            </table>
+                        </form>
+                        <!--                        -----------Step2------------>
+                        <!--                        -----------Overview------------>
+                        <form>
+                            <h4>Overview:</h4>
+                            <div class="form-group">
+                                <table class="table table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="3">Site A</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Site A:</td>
+                                            <td id="OverSiteA"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Library A:</td>
+                                            <td id="OverLibraryA"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Columns A:</td>
+                                            <td id="OverColumnsA"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="table table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="3">Site B</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Site B:</td>
+                                            <td id="OverSiteB"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Library B:</td>
+                                            <td id="OverLibraryB"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Columns B:</td>
+                                            <td id="OverColumnsB"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- /input-group -->
+                                <button class="btn btn-success" type="button" disabled=true>Copy</button>
+                            </div>
+                        </form>
+                        <!--                        -----------Step2------------>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function verifyList() {
+            verifyListSP();
+        }
+
+        function enableColumnsSection() {
+            //$("#addMoreColumns").prop("disabled", false); ------------------------ Cuando Agregues la opcion de leer columnas descomenta esta linea
+            $("#verifyColumns").prop("disabled", false);
+        }
+        var noColumnsAdded = 1;
+
+        function addColumns() {
+            var inputColumnHTML2 = "<div class='input-group'><input type='text' class='form-control' id='columns" + noColumnsAdded + "' placeholder='myColumn" + noColumnsAdded + "'></div> ";
+            $("#columTable").append(inputColumnHTML2);
+            noColumnsAdded++;
+        }
+    </script>
+    <script type="text/javascript">
+        var siteA;
+        var libraryA;
+        var columnsToReadA = [];
+        var siteLibraryvalidated = false;
+        var masterObjectListA = [];
+        var siteB;
+        var libraryB;
+        var columnsToReadB = [];
+        SP.SOD.executeFunc('sp.js', 'SP.ClientContext');
+
+        function verifyListSP() {
+            siteA = $('#sitea').val();
+            libraryA = $('#librarya').val();
+            $('#OverSiteA').append(siteA);
+            $('#OverLibraryA').append(libraryA);
+            //            console.log(siteA);
+            //            console.log(libraryA);
+            sharePointReady(siteA, libraryA);
+            return siteLibraryvalidated;
+        }
+        // Create an instance of the current context.
+        function sharePointReady(siteA, libraryA) {
+            var clientContext = new SP.ClientContext(siteA);
+            var oList = clientContext.get_web().get_lists().getByTitle(libraryA);
+            var camlQuery = new SP.CamlQuery();
+            var query = SP.CamlQuery.createAllItemsQuery();
+            this.collListItem = oList.getItems(query);
+            clientContext.load(collListItem);
+            clientContext.executeQueryAsync(Function.createDelegate(this, this.onRequestSucceeded), Function.createDelegate(this, this.onRequestFailed));
+        }
+
+        function onRequestSucceeded(sender, args) {
+            enableColumnsSection();
+            var listItemEnumerator = collListItem.getEnumerator();
+            var numberOfItems = 0;
+            while (listItemEnumerator.moveNext()) {
+                var oListItem = listItemEnumerator.get_current();
+                masterObjectListA.push(oListItem);
+                numberOfItems++;
+            }
+            $("#itemsFound").text(numberOfItems);
+        }
+
+        function onRequestFailed(sender, args) {
+            alert("No Funciono");
+        }
+
+        function readMasterObject() {
+            var masterO = masterObjectListA;
+            //Create a function to read and add the columns to an array
+            masterO.forEach(function (element) {
+                var itemType = element.get_fileSystemObjectType(); //iTem type 0 means is an item, 1 means is an folder
+                if (itemType == 0) {
+                    columnsToReadA.forEach(function (column) {
+                        if (column.toLocaleLowerCase() == "url") {
+                            console.log(getURL(element));
+                        }
+                        else {
+                            console.log(element.get_item(column));
+                        }
+                    });
+                }
+            });
+        }
+
+        function getURL(SPElement) {
+            var spElementPreUrl = SPElement.get_item("FileRef");
+            var composedURL = location.protocol + '//' + location.host + spElementPreUrl + "?Web=1";
+            return composedURL.split(' ').join('%20');
+        }
+
+        function readColumns() {
+            //                var arrayWithColumns = [];
+            //                for (i = 1; i < noColumnsAdded; i++) { //Add a for with the variable 
+            //                    arrayWithColumns.push("Puto");
+            //                }
+            //                alert(arrayWithColumns);
+            //Create code to get the 
+            columnsToReadA = ['FileLeafRef', "URL"];
+            $('#OverColumnsA').append(columnsToReadA);
+            fillSecondStepData();
+            //readMasterObject();
+            copyToSiteB();
+        }
+
+        function fillSecondStepData() {
+            siteB = "http://apshare.apci.com/sites/MARCOMMEuro";
+            libraryB = "MarComms documents list";
+            columnsToReadB = ["Title", "URL"];
+            $('#OverSiteB').append(siteB);
+            $('#OverLibraryB').append(libraryB);
+            $('#OverColumnsB').append(columnsToReadB);
+        }
+
+        var itemsadded = 0;
+        
+        function copyToSiteB() {
+            var clientContext = new SP.ClientContext(siteB);
+            var oList = clientContext.get_web().get_lists().getByTitle(libraryB);
+            var masterO = masterObjectListA;
+            var itemCreateInfo = new SP.ListItemCreationInformation();
+            this.oListItem = oList.addItem(itemCreateInfo);
+            masterO.forEach(function (element) {
+                var itemType = element.get_fileSystemObjectType();
+                if (itemType == 0) {
+                    columnsToReadA.forEach(function (column) {
+                        if (column.toLocaleLowerCase() == "url") {
+                            oListItem.set_item('URL', getURL(element));
+                        }
+                        else {
+                            oListItem.set_item('Title', element.get_item(column));
+                        }
+                    });
+                }
+                oListItem.update();
+                clientContext.load(oListItem);
+                itemsadded++;
+                clientContext.executeQueryAsync(Function.createDelegate(this, this.onQuerySucceededSiteB), Function.createDelegate(this, this.onQueryFailedSiteB));
+            });
+        }
+
+        function onQuerySucceededSiteB() {
+            console.log("Item added n:"+itemsadded);
+            // alert('Item created: ' + oListItem.get_id());
+        }
+
+        function onQueryFailedSiteB(sender, args) {
+            alert('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+        }
+        //        function copyToSiteB() {
+        //            var clientContext;
+        //            var oWebsite;
+        //            var oList;
+        //            var fileCreateInfo;
+        //            var fileContent;
+        //            var contTyp = "0x01010A";
+        //            clientContext = new SP.ClientContext(siteB);
+        //            CreateListItem(clientContext, contTyp);
+        //            //            oWebsite = clientContext.get_web();
+        //            //            oList = clientContext.get_web().get_lists().getByTitle(libraryB);
+        //            //            fileCreateInfo = new SP.FileCreationInformation();
+        //            //            fileCreateInfo.set_url("http://apshare.apci.com/sites/CorpComms_WG/SiteDirectory/MCliterature/MarComms%20documents/Freshline_MP_Datasheet_ES_2017.pdf?Web=1");
+        //            //            var value = ""
+        //            //            fileCreateInfo.set_content(value);
+        //            //            this.newFile = oList.get_rootFolder().get_files().add(fileCreateInfo);
+        //            //            clientContext.load(this.newFile);
+        //            //            clientContext.executeQueryAsync(Function.createDelegate(this, successHandler), Function.createDelegate(this, errorHandler));
+        //            function successHandler() {
+        //                alert("Funciona");
+        //                //resultpanel.innerHTML = "Go to the " + "<a href='../Lists/Shared Documents'>document library</a> " + "to see your new file.";
+        //            }
+        //
+        //            function errorHandler(sender, args) {
+        //                alert('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+        //                //resultpanel.innerHTML = "Request failed: " + arguments[1].get_message();
+        //            }
+        //        }
+        //
+        //        function copyToSiteB1() {
+        //            var clientContext = new SP.ClientContext(siteB);
+        //            var oList = clientContext.get_web().get_lists().getByTitle(libraryB);
+        //            var itemCreateInfo = new SP.ListItemCreationInformation();
+        //            this.oListItem = oList.addItem(itemCreateInfo);
+        //            oListItem.set_item('Title', 'My New Item!');
+        //            oListItem.set_item('URL', 'http://apshare.apci.com/sites/CorpComms_WG/SiteDirectory/MCliterature/MarComms%20documents/Freshline_MP_Datasheet_ES_2017.pdf?Web=1');
+        //            oListItem.update();
+        //            clientContext.load(oListItem);
+        //            clientContext.executeQueryAsync(Function.createDelegate(this, this.onQuerySucceededSiteB), Function.createDelegate(this, this.onQueryFailedSiteB));
+        //        }
+        //
+        //        function onQuerySucceededSiteB() {
+        //            alert('Item created: ' + oListItem.get_id());
+        //        }
+        //
+        //        function onQueryFailedSiteB(sender, args) {
+        //            console.log('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+        //            alert('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+        //        }
+        //
+        //        function CreateListItem(clientContext, contentTypeId) {
+        //            // Get current web 
+        //            //
+        //            var oWeb = clientContext.get_web();
+        //            // Get list by title
+        //            //
+        //            var oList = oWeb.get_lists().getByTitle(libraryB);
+        //            // Create new object for list item creation 
+        //            //
+        //            var oListItemCreationInfo = new SP.FileCreationInformation();
+        //            oListItemCreationInfo.set_url("http://apshare.apci.com/sites/CorpComms_WG/SiteDirectory/MCliterature/MarComms%20documents/Freshline_MP_Datasheet_ES_2017.pdf?Web=1");
+        //            var newListItem = oList.addItem(oListItemCreationInfo);
+        //            newListItem.set_item('ContentTypeId', contentTypeId);
+        //            newListItem.set_item('Title', 'My New Item!');
+        //            newListItem.set_item('URL', 'http://enriquegamboa.info');
+        //            //newListItem.set_url("http://apshare.apci.com/sites/CorpComms_WG/SiteDirectory/MCliterature/MarComms%20documents/Freshline_MP_Datasheet_ES_2017.pdf?Web=1");
+        //            //newListItem.set_url("http://apshare.apci.com/sites/CorpComms_WG/SiteDirectory/MCliterature/MarComms%20documents/Freshline_MP_Datasheet_ES_2017.pdf?Web=1");
+        //            this.newFile = oList.get_rootFolder().get_files().add(newListItem);
+        //            clientContext.load(this.newFile);
+        //            //            newListItem.update();
+        //            //            clientContext.load(newListItem);
+        //            clientContext.executeQueryAsync(onSuccessAddItem, queryFailureAddItem);
+        //        }
+        //
+        //        function onSuccessAddItem() {
+        //            alert("Item added successfully");
+        //        }
+        //
+        //        function queryFailureAddItem(sender, args) {
+        //            alert('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+        //        }
+    </script>
+</body>
+
+</html>

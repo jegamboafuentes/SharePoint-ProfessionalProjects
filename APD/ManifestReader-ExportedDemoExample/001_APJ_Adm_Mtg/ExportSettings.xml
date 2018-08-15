@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ExportSettings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" SiteUrl="http://apshare.apci.com/sites/APJ_Adm_Mtg" FileLocation="R:\export\001_APJ_Adm_Mtg" BaseFileName="" IncludeSecurity="None" IncludeVersions="All" ExportPublicSchema="true" ExportFrontEndFileStreams="true" ExportMethod="ExportAll" ExcludeDependencies="true" xmlns="urn:deployment-exportsettings-schema">
+    <ExportObjects>
+        <DeploymentObject Id="c30255e1-fe1c-4d77-a576-1e1c70ead7eb" Type="Web" ParentId="00000000-0000-0000-0000-000000000000" Url="/sites/APJ_Adm_Mtg" ExcludeChildren="false" IncludeDescendants="All" />
+    </ExportObjects>
+</ExportSettings>

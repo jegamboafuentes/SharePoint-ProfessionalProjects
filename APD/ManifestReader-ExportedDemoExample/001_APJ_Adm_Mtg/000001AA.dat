@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WebPart xmlns="http://schemas.microsoft.com/WebPart/v2">
+	<_locDefinition>
+		<_locTag _loc="locData">Title</_locTag>
+		<_locTag _loc="locData">Description</_locTag>		
+	</_locDefinition>
+	<Assembly>Microsoft.Sharepoint.Portal, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c</Assembly>
+<TypeName>Microsoft.SharePoint.Portal.WebControls.PeopleSearchBoxEx</TypeName>
+<Title>人の検索ボックス</Title>
+<Description>人の検索に使用します。</Description>
+<FrameType>None</FrameType>
+<AllowMinimize>true</AllowMinimize>
+<AllowRemove>true</AllowRemove><IsVisible>true</IsVisible>
+<Width>420px</Width>
+<GoImageUrl xmlns="urn:schemas-microsoft-com:SearchBoxEx">/_layouts/images/gosearch.gif</GoImageUrl>
+<GoImageUrlRTL xmlns="urn:schemas-microsoft-com:SearchBoxEx">/_layouts/images/goRTL.gif</GoImageUrlRTL>
+<GoImageActiveUrl xmlns="urn:schemas-microsoft-com:SearchBoxEx">/_layouts/images/gosearch.gif</GoImageActiveUrl>
+<GoImageActiveUrlRTL  xmlns="urn:schemas-microsoft-com:SearchBoxEx">/_layouts/images/goRTL.gif</GoImageActiveUrlRTL> 
+<SearchBoxTableClass xmlns="urn:schemas-microsoft-com:SearchBoxEx">ms-sbtablealt</SearchBoxTableClass>
+<DropDownMode xmlns="urn:schemas-microsoft-com:SearchBoxEx">HideScopeDD</DropDownMode>
+<TextBoxWidth xmlns="urn:schemas-microsoft-com:SearchBoxEx">280</TextBoxWidth>
+<SearchResultPageURL xmlns="urn:schemas-microsoft-com:SearchBoxEx">peopleresults.aspx</SearchResultPageURL>
+<ShowSearchOptions xmlns="urn:schemas-microsoft-com:SearchBoxEx">true</ShowSearchOptions>
+</WebPart>

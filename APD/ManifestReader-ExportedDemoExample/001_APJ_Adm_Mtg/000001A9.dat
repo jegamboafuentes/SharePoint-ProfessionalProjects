@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<webParts>
+  <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+    <metaData>
+      <type name="Microsoft.SharePoint.Portal.WebControls.PageContextFilterWebPart, Microsoft.SharePoint.Portal,Version=12.0.0.0,Culture=neutral,PublicKeyToken=71e9bce111e9429c" />
+      <importErrorMessage>この Web パーツはインポートできません。</importErrorMessage>
+    </metaData>
+    <data>
+      <properties>
+        <property name="FilterName" type="string">ページ フィールド</property>
+        <property name="Title" type="string">ページ フィールド フィルタ</property>
+        <property name="Description" type="string">現在のページに関する情報を使用して、Web パーツのコンテンツをフィルタします。</property>
+        <property name="ChromeType">None</property>
+        <property name="CatalogIconImageUrl" type="string">/_layouts/images/wp_Filter.gif</property>
+        <property name="TitleIconImageUrl" type="string">/_layouts/images/wp_Filter.gif</property>
+      </properties>
+    </data>
+  </webPart>
+</webParts>

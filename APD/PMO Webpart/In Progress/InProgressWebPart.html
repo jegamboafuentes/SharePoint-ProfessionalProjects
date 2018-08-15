@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>PMO Solution</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> In progress </h3> </div>
+                    <div class="panel-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Document</th>
+                                    <th>Deliverable</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inProgressTable">
+<!--                                The content from SP will stay here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        ExecuteOrDelayUntilScriptLoaded(retrieveListItemsProgress, "sp.js");
+        function retrieveListItemsProgress() {
+            cleanerProgress();
+            var siteUrl = _spPageContextInfo.webServerRelativeUrl;
+            var clientContext = new SP.ClientContext(siteUrl);
+            var oList = clientContext.get_web().get_lists().getByTitle('DeliverableDocument');
+            var camlQuery = new SP.CamlQuery();
+            var query = SP.CamlQuery.createAllItemsQuery();
+            this.collListItem = oList.getItems(query);
+            clientContext.load(collListItem);
+            clientContext.executeQueryAsync(Function.createDelegate(this, this.onQuerySucceededProgress), Function.createDelegate(this, this.onQueryFailedProgress));
+        }
+
+        function onQuerySucceededProgress(sender, args) {
+            var listItemEnumerator = collListItem.getEnumerator();
+            while (listItemEnumerator.moveNext()) {
+                var oListItem = listItemEnumerator.get_current();
+                var nameFile = oListItem.get_item('FileLeafRef');
+                var status = oListItem.get_item('Status');
+                var deliverable = oListItem.get_item('Deliverable').get_lookupValue();
+                if(status=="In Progress"){
+//                    alert("hola");
+                    $("#inProgressTable").append($("<tr><td>"+nameFile+"</td><td>"+deliverable+"</td></tr>"));
+                }
+            }
+        }
+
+        function onQueryFailedProgress(sender, args) {
+            alert('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+        }
+        
+        function cleanerProgress(){
+            $("#inProgressTable").empty();
+        }
+    </script>
+</body>
+
+</html>

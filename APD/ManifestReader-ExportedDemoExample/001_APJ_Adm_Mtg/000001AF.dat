@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<webParts>
+  <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+    <metaData>
+      <type name="Microsoft.Office.Server.Search.WebControls.HighConfidenceWebPart, Microsoft.Office.Server.Search,Version=12.0.0.0,Culture=neutral,PublicKeyToken=71e9bce111e9429c" />
+      <importErrorMessage>Cannot import this Web Part.</importErrorMessage>
+    </metaData>
+    <data>
+      <properties>
+        <property name="Title" type="string">検索のおすすめコンテンツ</property>
+        <property name="Description" type="string">特殊な用語や精度の高い検索結果を表示する Web パーツです。</property>
+        <property name="ChromeType">None</property>
+        <property name="AllowMinimize" type="bool">true</property>
+        <property name="AllowClose" type="bool">true</property> 
+        <property name="Hidden" type="bool">false</property>
+        <property name="PartOrder" type="int">1</property>
+        <property name="DisplayHCImage" type="bool">false</property>
+        <property name="DisplayHCTitle" type="bool">false</property>
+        <property name="DisplayHCProps" type="bool">false</property>
+        <property name="DisplayHCDescription" type="bool">false</property>
+     </properties>
+    </data>
+  </webPart>
+</webParts>

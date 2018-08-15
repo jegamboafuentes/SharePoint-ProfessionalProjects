@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<WebPart xmlns="http://schemas.microsoft.com/WebPart/v2">
-	<Assembly>Microsoft.SharePoint.Portal, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c</Assembly>
-	<TypeName>Microsoft.SharePoint.Portal.WebControls.ThisWeekInPicturesWebPart</TypeName>
-    <Title>画像で見る 1 週間</Title>
-    <Description>イメージ ライブラリのイメージを 1 つ表示し、イメージ ライブラリのすべてのイメージがユーザーに表示されるスライド ショーにリンクします。</Description>
-</WebPart>

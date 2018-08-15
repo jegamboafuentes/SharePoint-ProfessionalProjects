@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<LookupLists xmlns="urn:deployment-lookuplistmap-schema">
-    <LookupList Id="3bcb2796-1ee2-4c0f-8dfc-764cf0840efc" Url="/sites/APJ_Adm_Mtg/_catalogs/users" Included="false">
-        <LookupItems />
-    </LookupList>
-    <LookupList Id="0209f915-e580-40b3-ba20-24e97fd69256" Url="/sites/APJ_Adm_Mtg/Lists/TaxonomyHiddenList" Included="true">
-        <LookupItems />
-    </LookupList>
-</LookupLists>
