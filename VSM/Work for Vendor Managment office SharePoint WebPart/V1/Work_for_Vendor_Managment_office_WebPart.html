@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Work for Vendor Management Office</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <style>
+        .dot {
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .table td {
+            text-align: center;
+        }
+
+        .table th {
+            text-align: center;
+        }
+
+        .panel-primary {
+            width: 83%;
+        }
+    </style>
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <a style="color:white;" href="https://versummaterials.sharepoint.com/sites/VMO/Lists/Vendor%20Score%20Card/Allitemsg.aspx" target="_blank">
+                            <h3 class="panel-title">Strategic Partner Score Card (Beta)</h3>
+                        </a>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Vendor</th>
+                                    <th>Status</th>
+                                    <th>Change from prior month</th>
+                                    <th>Chart last 90 days</th>
+                                </tr>
+                            </thead>
+                            <tbody id="completeTable">
+                                <!--                                The content from SP will stay here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Chart last 90 days</h3>
+                    <h4 id="companyChart">Company</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="myChart">
+                        <!-- Plotly chart will be drawn inside this DIV -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        ExecuteOrDelayUntilScriptLoaded(retrieveListItemsComplete, "sp.js");
+
+        function retrieveListItemsComplete() {
+            var siteUrl = _spPageContextInfo.webServerRelativeUrl;
+            var clientContext = new SP.ClientContext(siteUrl);
+            var oList = clientContext.get_web().get_lists().getByTitle('Vendor Score Card');
+            var camlQuery = new SP.CamlQuery();
+            var query = SP.CamlQuery.createAllItemsQuery();
+            this.collListItem = oList.getItems(query);
+            clientContext.load(collListItem);
+            clientContext.executeQueryAsync(Function.createDelegate(this, this.onQuerySucceededCompleted), Function.createDelegate(this, this.onQueryFailedCompleted));
+        }
+
+        function onQuerySucceededCompleted(sender, args) {
+            var listItemEnumerator = collListItem.getEnumerator();
+            while (listItemEnumerator.moveNext()) {
+                var oListItem = listItemEnumerator.get_current();
+                console.log(oListItem);
+                var title = oListItem.get_item('Title');
+                console.log(title);
+                var status = calculateStatus(oListItem);
+                var trend = calculate30Trend(oListItem);
+                var jan = oListItem.get_item('Month_x0020_1');
+                var feb = oListItem.get_item('ht7j');
+                var mar = oListItem.get_item('cryx');
+                var apr = oListItem.get_item('e03i');
+                var may = oListItem.get_item('a8da');
+                var jun = oListItem.get_item('cm8c');
+                var jul = oListItem.get_item('l6do');
+                var aug = oListItem.get_item('p4dm');
+                var sep = oListItem.get_item('_x0078_b08');
+                var oct = oListItem.get_item('t7w5');
+                var nov = oListItem.get_item('cx6j');
+                var dec = oListItem.get_item('z2wd');
+                updateListItem(oListItem.get_id(), status, trend);
+                $("#completeTable").append($("<tr><td>" + title + "</td><td>" + signsForStatus(status) + "</td>" + "<td>" + signsForTrend(trend) + "</td><td><button type='button' class='btn btn-info' data-toggle='modal' data-target='#myModal' onclick=\"populateChart('" + title + "'," + jan + "," + feb + "," + mar + "," + apr + "," + may + "," + jun + "," + jul + "," + aug + "," + sep + "," + oct + "," + nov + "," + dec + ")\"><i class='fas fa-chart-line fa-2x''></i></button></td></tr>"));
+            }
+        }
+
+        function onQueryFailedCompleted(sender, args) {
+            alert('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+        }
+
+        function updateListItem(itemID, status, trend) {
+            var siteUrl = _spPageContextInfo.webServerRelativeUrl;
+            var clientContext = new SP.ClientContext(siteUrl);
+            var oList = clientContext.get_web().get_lists().getByTitle('Vendor Score Card');
+            this.oListItem = oList.getItemById(itemID);
+            oListItem.set_item('xtpu', status);
+            oListItem.set_item('Trend_x003a__x0020_Last_x0020_30', trend);
+            oListItem.update();
+            clientContext.executeQueryAsync(Function.createDelegate(this, this.onQuerySucceededUpdating), Function.createDelegate(this, this.onQueryFailedUpdating));
+        }
+
+        function onQuerySucceededUpdating() {
+            //alert('Item updated!');
+        }
+
+        function onQueryFailedUpdating(sender, args) {
+            alert('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+        }
+
+
+        function calculateStatus(itemObject) {
+            var newStatus = 0;
+            var jan = itemObject.get_item('Month_x0020_1');
+            var feb = itemObject.get_item('ht7j');
+            var mar = itemObject.get_item('cryx');
+            var apr = itemObject.get_item('e03i');
+            var may = itemObject.get_item('a8da');
+            var jun = itemObject.get_item('cm8c');
+            var jul = itemObject.get_item('l6do');
+            var aug = itemObject.get_item('p4dm');
+            var sep = itemObject.get_item('_x0078_b08');
+            var oct = itemObject.get_item('t7w5');
+            var nov = itemObject.get_item('cx6j');
+            var dec = itemObject.get_item('z2wd');
+            if (dec != null) {
+                newStatus = dec;
+            } else if (nov != null) {
+                newStatus = nov;
+            } else if (oct != null) {
+                newStatus = oct;
+            } else if (sep != null) {
+                newStatus = sep;
+            } else if (aug != null) {
+                newStatus = aug;
+            } else if (jul != null) {
+                newStatus = jul;
+            } else if (jun != null) {
+                newStatus = jun;
+            } else if (may != null) {
+                newStatus = may;
+            } else if (apr != null) {
+                newStatus = apr;
+            } else if (mar != null) {
+                newStatus = mar;
+            } else if (feb != null) {
+                newStatus = feb;
+            } else if (jan != null) {
+                newStatus = jan;
+            }
+            return newStatus;
+        }
+
+        function calculate30Trend(itemObject) {
+            var newTrend = 0;
+            var lastMonth = 0;
+            var firstMonth = 0;
+            var jan = itemObject.get_item('Month_x0020_1');
+            var feb = itemObject.get_item('ht7j');
+            var mar = itemObject.get_item('cryx');
+            var apr = itemObject.get_item('e03i');
+            var may = itemObject.get_item('a8da');
+            var jun = itemObject.get_item('cm8c');
+            var jul = itemObject.get_item('l6do');
+            var aug = itemObject.get_item('p4dm');
+            var sep = itemObject.get_item('_x0078_b08');
+            var oct = itemObject.get_item('t7w5');
+            var nov = itemObject.get_item('cx6j');
+            var dec = itemObject.get_item('z2wd');
+            if (dec != null) {
+                lastMonth = dec;
+                if (nov != null) {
+                    firstMonth = nov;
+                } else if (oct != null) {
+                    firstMonth = oct;
+                } else if (sep != null) {
+                    firstMonth = sep;
+                } else if (aug != null) {
+                    firstMonth = aug;
+                } else if (jul != null) {
+                    firstMonth = jul;
+                } else if (jun != null) {
+                    firstMonth = jun;
+                } else if (may != null) {
+                    firstMonth = may;
+                } else if (apr != null) {
+                    firstMonth = apr;
+                } else if (mar != null) {
+                    firstMonth = mar;
+                } else if (feb != null) {
+                    firstMonth = feb;
+                } else if (jan != null) {
+                    firstMonth = jan;
+                }
+                newTrend = lastMonth - firstMonth;
+            } else if (nov != null) {
+                lastMonth = nov;
+                if (oct != null) {
+                    firstMonth = oct;
+                } else if (sep != null) {
+                    firstMonth = sep;
+                } else if (aug != null) {
+                    firstMonth = aug;
+                } else if (jul != null) {
+                    firstMonth = jul;
+                } else if (jun != null) {
+                    firstMonth = jun;
+                } else if (may != null) {
+                    firstMonth = may;
+                } else if (apr != null) {
+                    firstMonth = apr;
+                } else if (mar != null) {
+                    firstMonth = mar;
+                } else if (feb != null) {
+                    firstMonth = feb;
+                } else if (jan != null) {
+                    firstMonth = jan;
+                }
+                newTrend = lastMonth - firstMonth;
+            } else if (oct != null) {
+                lastMonth = oct;
+                if (sep != null) {
+                    firstMonth = sep;
+                } else if (aug != null) {
+                    firstMonth = aug;
+                } else if (jul != null) {
+                    firstMonth = jul;
+                } else if (jun != null) {
+                    firstMonth = jun;
+                } else if (may != null) {
+                    firstMonth = may;
+                } else if (apr != null) {
+                    firstMonth = apr;
+                } else if (mar != null) {
+                    firstMonth = mar;
+                } else if (feb != null) {
+                    firstMonth = feb;
+                } else if (jan != null) {
+                    firstMonth = jan;
+                }
+                newTrend = lastMonth - firstMonth;
+            } else if (sep != null) {
+                lastMonth = sep;
+                if (aug != null) {
+                    firstMonth = aug;
+                } else if (jul != null) {
+                    firstMonth = jul;
+                } else if (jun != null) {
+                    firstMonth = jun;
+                } else if (may != null) {
+                    firstMonth = may;
+                } else if (apr != null) {
+                    firstMonth = apr;
+                } else if (mar != null) {
+                    firstMonth = mar;
+                } else if (feb != null) {
+                    firstMonth = feb;
+                } else if (jan != null) {
+                    firstMonth = jan;
+                }
+                newTrend = lastMonth - firstMonth;
+            } else if (aug != null) {
+                lastMonth = aug;
+                if (jul != null) {
+                    firstMonth = jul;
+                } else if (jun != null) {
+                    firstMonth = jun;
+                } else if (may != null) {
+                    firstMonth = may;
+                } else if (apr != null) {
+                    firstMonth = apr;
+                } else if (mar != null) {
+                    firstMonth = mar;
+                } else if (feb != null) {
+                    firstMonth = feb;
+                } else if (jan != null) {
+                    firstMonth = jan;
+                }
+                newTrend = lastMonth - firstMonth;
+            } else if (jul != null) {
+                lastMonth = jul;
+                if (jun != null) {
+                    firstMonth = jun;
+                } else if (may != null) {
+                    firstMonth = may;
+                } else if (apr != null) {
+                    firstMonth = apr;
+                } else if (mar != null) {
+                    firstMonth = mar;
+                } else if (feb != null) {
+                    firstMonth = feb;
+                } else if (jan != null) {
+                    firstMonth = jan;
+                }
+                newTrend = lastMonth - firstMonth;
+            } else if (jun != null) {
+                lastMonth = jun;
+                if (may != null) {
+                    firstMonth = may;
+                } else if (apr != null) {
+                    firstMonth = apr;
+                } else if (mar != null) {
+                    firstMonth = mar;
+                } else if (feb != null) {
+                    firstMonth = feb;
+                } else if (jan != null) {
+                    firstMonth = jan;
+                }
+                newTrend = lastMonth - firstMonth;
+            } else if (may != null) {
+                lastMonth = may;
+                if (apr != null) {
+                    firstMonth = apr;
+                } else if (mar != null) {
+                    firstMonth = mar;
+                } else if (feb != null) {
+                    firstMonth = feb;
+                } else if (jan != null) {
+                    firstMonth = jan;
+                }
+                newTrend = lastMonth - firstMonth;
+            } else if (apr != null) {
+                lastMonth = apr;
+                if (mar != null) {
+                    firstMonth = mar;
+                } else if (feb != null) {
+                    firstMonth = feb;
+                } else if (jan != null) {
+                    firstMonth = jan;
+                }
+                newTrend = lastMonth - firstMonth;
+            } else if (mar != null) {
+                lastMonth = mar;
+                if (feb != null) {
+                    firstMonth = feb;
+                } else if (jan != null) {
+                    firstMonth = jan;
+                }
+                newTrend = lastMonth - firstMonth;
+            } else if (feb != null) {
+                lastMonth = feb;
+                firstMonth = jan;
+                newTrend = lastMonth - firstMonth;
+            } else if (jan != null) {
+                newTrend = jan;
+            }
+            return newTrend.toFixed(2);
+        }
+
+        function signsForStatus(status) {
+            var sign = "<span style='background-color:grey' class='dot' aria-hidden='true'></span>";
+            if (status >= .85) {
+                sign = "<span style='background-color:green' class='dot' aria-hidden='true'></span>";
+            } else if (status <= .70) {
+                sign = "<span style='background-color:red' class='dot' aria-hidden='true'></span>";
+            } else if (status < .85 && status > .70) {
+                sign = "<span style='background-color:yellow' class='dot' aria-hidden='true'></span>";
+            }
+            return sign;
+        }
+
+        function signsForTrend(trend) {
+            var sign = "<span style='color:grey; font-size: 2em;' class='glyphicon glyphicon-arrow-left' aria-hidden='true'></span>";
+            if (trend > 0) {
+                sign = "<span style='color:green; font-size: 2em;' class='glyphicon glyphicon-arrow-up' aria-hidden='true'></span>";
+            } else if (trend == 0) {
+                sign = "<span style='color:yellow; font-size: 2em;' class='glyphicon glyphicon-arrow-right' aria-hidden='true'></span>";
+            } else if (trend < 0) {
+                sign = "<span style='color:red; font-size: 2em;' class='glyphicon glyphicon-arrow-down' aria-hidden='true'></span>";
+            }
+            return sign;
+        }
+
+        function populateChart(company, jan, feb, mach, apr, may, jun, jul, aug, sep, oct, nov, dec) {
+            $("#companyChart").text(company);
+            var trace1 = {
+                x: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                y: [jan, feb, mach, apr, may, jun, jul, aug, sep, oct, nov, dec], //Data
+                type: 'scatter',
+                name: 'Red',
+            };
+            var data = [trace1];
+            Plotly.newPlot('myChart', data);
+        }
+    </script>
+</body>
+
+</html>

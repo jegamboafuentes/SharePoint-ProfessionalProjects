@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Work for Vendor Management Office</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <style>
+        .numberCircle {
+            border-radius: 50%;
+            behavior: url(PIE.htc);
+            /* remove if you don't care about IE8 */
+            width: 45px;
+            height: 45px;
+            padding: 11px;
+            background: #fff;
+            border: 2px solid #666;
+            color: #333;
+            text-align: center;
+            font: 15px Arial, sans-serif;
+            display: inline-block;
+        }
+
+        .table td {
+            text-align: center;
+        }
+
+        .table th {
+            text-align: center;
+        }
+
+        .panel-primary {
+            width: 83%;
+        }
+    </style>
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/tippy.js@2.5.4/dist/tippy.all.min.js"></script>
+    <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" style="color:white;">Score Card <small>(Beta)</small></h3>
+                    </div>
+                    <div class="panel-body">
+                        <table id="myTable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Partner</th>
+                                    <th>Operational</th>
+                                    <th>Project/Delivery</th>
+                                    <th>Commercial/Financial</th>
+                                    <th>Relationship</th>
+                                    <th>Chart: Period-to-Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="completeTable">
+                                <!--                                The content from SP will stay here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Chart: Period-to-Date</h4>
+                    <h3 id="companyChart">Company</h3>
+                </div>
+                <div class="modal-body">
+                    <div id="myChart">
+                        <!-- Plotly chart will be drawn inside this DIV -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {});
+        ExecuteOrDelayUntilScriptLoaded(retrieveListItemsCompleteAccenture, "sp.js");
+
+        //Accenture -- 	Partner ScoreCard-Accenture
+        //Cai -- Partner ScoreCard-CAI
+        //Hitachi -- 	Partner ScoreCard-Hitachi
+        //Infosys -- PartnerScoreCard-INFOSYS
+        //Microsoft -- Partner ScoreCard-Microsoft
+        //SAP -- Partner ScoreCard-SAP
+        //Secureworks -- Partner ScoreCard-Secureworks
+        //Virtela -- Partner ScoreCard-Virtela
+
+        //---Accenture--Start----------------------------------------------------------------------------------------------------------------
+        function retrieveListItemsCompleteAccenture() { //Accenture
+
+            var siteUrl = _spPageContextInfo.webServerRelativeUrl;
+            var clientContext = new SP.ClientContext(siteUrl);
+            var oListAccenture = clientContext.get_web().get_lists().getByTitle('Partner ScoreCard-Accenture');
+            //var oListAccenture = clientContext.get_web().get_lists().getByTitle('PartnerScoreCard-INFOSYS');
+            var camlQuery = new SP.CamlQuery();
+            var query = SP.CamlQuery.createAllItemsQuery();
+            this.collListItem = oListAccenture.getItems(query);
+            clientContext.load(collListItem);
+            clientContext.executeQueryAsync(Function.createDelegate(this, this.accentureSucceeded), Function.createDelegate(this, this.accentureFailed));
+        }
+
+        function accentureSucceeded(sender, args) {
+            // --- Variable nomenclature and meanings 
+            //op = Operational
+            //pd = Project / Delivery
+            //cm = Commercial / Finance
+            //rs = Relationship
+            //op1 = SLA/KPI compliance
+            //op2 = Quality of Support, Service or Product
+            //op3 = Operations Change Management
+            //op4 = Technical knowledge
+            //op5 = Regulatory & Compliance
+            //pd1 = Proper Planning , Ownership, Risk management & Mitigation
+            //pd2 = Project Management (resourcing, communication..)
+            //cm1 = Price competitiveness
+            //cm2 = SOW's, Contact changes,  Invoices
+            //cm3 = Financial variance
+            //cm4 = Cost Savings
+            //cm5 = console.log(oListItem);
+            //rs1 = Innovation
+            //rs2 = Effectiveness of Account Team
+            //rs3 = Effective strategic communications and alignment between companies
+            //rs4 = Effective relationship building
+            var libName = "Accenture";
+            var opCounter = 0;
+            var pdCounter = 0;
+            var cmCounter = 0;
+            var rsCounter = 0;
+            var aveAgreedOp = 0;
+            var aveAgreedpd = 0;
+            var aveAgreedcm = 0;
+            var aveAgreedrs = 0;
+            var aveQop = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQpd = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQcm = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQrs = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var arrayAgreedOp = [];
+            var arrayAgreedPd = [];
+            var arrayAgreedCm = [];
+            var arrayAgreedRs = [];
+
+            var listItemEnumerator = collListItem.getEnumerator();
+            while (listItemEnumerator.moveNext()) {
+                var oListItem = listItemEnumerator.get_current();
+                //console.log(oListItem);
+                if (oListItem.get_item("Metric") == "Operational") {
+                    opCounter++;
+                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQop = counterEachQuarter(libName, aveQop, oListItem);
+                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Project/Delivery") {
+                    pdCounter++;
+                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQpd = counterEachQuarter(libName, aveQpd, oListItem);
+                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Commercial/Financial") {
+                    cmCounter++;
+                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQcm = counterEachQuarter(libName, aveQcm, oListItem);
+                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Relationship") {
+                    rsCounter++;
+                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQrs = counterEachQuarter(libName, aveQrs, oListItem);
+                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                }
+
+            }
+
+            aveAgreedOp = aveAgreedOp / opCounter;
+            aveAgreedpd = aveAgreedpd / pdCounter;
+            aveAgreedcm = aveAgreedcm / cmCounter;
+            aveAgreedrs = aveAgreedrs / rsCounter;
+            aveQop = calculateAvePerQuarter(opCounter, aveQop);
+            aveQpd = calculateAvePerQuarter(pdCounter, aveQpd);
+            aveQcm = calculateAvePerQuarter(cmCounter, aveQcm);
+            aveQrs = calculateAvePerQuarter(rsCounter, aveQrs);
+
+
+
+            $("#completeTable").append($("<tr><td><a href='https://versummaterials.sharepoint.com/sites/VMO/Lists/Accenture/Allitemsg.aspx' target='_blank'>Accenture</a></td><td>" + signsForStatus("op", arrayAgreedOp, aveAgreedOp) + "</td><td>" + signsForStatus("pd", arrayAgreedPd, aveAgreedpd) + "</td><td>" + signsForStatus("cm", arrayAgreedCm, aveAgreedcm) + "</td><td>" + signsForStatus("rs", arrayAgreedRs, aveAgreedrs) + "</td><td><button id='accentureChartButton' type='button' class='btn btn-info' data-toggle='modal' data-target='#myModal'><i class='fas fa-chart-line fa-2x''></i></button></td></tr>"));
+            $("#accentureChartButton").click(function() {
+                populateChart(libName, aveQop, aveQpd, aveQcm, aveQrs);
+            });
+            retrieveListItemsCompleteCAI(); //<------- Calling next List
+
+        }
+
+        function accentureFailed(sender, args) {
+            alert('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+        }
+        //---Accenture--FIN----------------------------------------------------------------------------------------------------------------
+
+        //---CAI--Start----------------------------------------------------------------------------------------------------------------
+        function retrieveListItemsCompleteCAI() { //CAI
+
+            var siteUrl = _spPageContextInfo.webServerRelativeUrl;
+            var clientContext = new SP.ClientContext(siteUrl);
+            var oListCAI = clientContext.get_web().get_lists().getByTitle('Partner ScoreCard-CAI');
+            var camlQuery = new SP.CamlQuery();
+            var query = SP.CamlQuery.createAllItemsQuery();
+            this.collListItem = oListCAI.getItems(query);
+            clientContext.load(collListItem);
+            clientContext.executeQueryAsync(Function.createDelegate(this, this.CAISucceeded), Function.createDelegate(this, this.CAIFailed));
+        }
+
+        function CAISucceeded(sender, args) {
+            // --- Variable nomenclature and meanings 
+            //op = Operational
+            //pd = Project / Delivery
+            //cm = Commercial / Finance
+            //rs = Relationship
+            //op1 = SLA/KPI compliance
+            //op2 = Quality of Support, Service or Product
+            //op3 = Operations Change Management
+            //op4 = Technical knowledge
+            //op5 = Regulatory & Compliance
+            //pd1 = Proper Planning , Ownership, Risk management & Mitigation
+            //pd2 = Project Management (resourcing, communication..)
+            //cm1 = Price competitiveness
+            //cm2 = SOW's, Contact changes,  Invoices
+            //cm3 = Financial variance
+            //cm4 = Cost Savings
+            //cm5 = console.log(oListItem);
+            //rs1 = Innovation
+            //rs2 = Effectiveness of Account Team
+            //rs3 = Effective strategic communications and alignment between companies
+            //rs4 = Effective relationship building
+            var libName = "CAI";
+            var opCounter = 0;
+            var pdCounter = 0;
+            var cmCounter = 0;
+            var rsCounter = 0;
+            var aveAgreedOp = 0;
+            var aveAgreedpd = 0;
+            var aveAgreedcm = 0;
+            var aveAgreedrs = 0;
+            var aveQop = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQpd = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQcm = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQrs = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var arrayAgreedOp = [];
+            var arrayAgreedPd = [];
+            var arrayAgreedCm = [];
+            var arrayAgreedRs = [];
+
+            var listItemEnumerator = collListItem.getEnumerator();
+            while (listItemEnumerator.moveNext()) {
+                var oListItem = listItemEnumerator.get_current();
+                //                console.log(oListItem);
+                if (oListItem.get_item("Metric") == "Operational") {
+                    opCounter++;
+                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQop = counterEachQuarter(libName, aveQop, oListItem);
+                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Project/Delivery") {
+                    pdCounter++;
+                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQpd = counterEachQuarter(libName, aveQpd, oListItem);
+                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Commercial/Financial") {
+                    cmCounter++;
+                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQcm = counterEachQuarter(libName, aveQcm, oListItem);
+                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Relationship") {
+                    rsCounter++;
+                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQrs = counterEachQuarter(libName, aveQrs, oListItem);
+                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                }
+
+            }
+
+            aveAgreedOp = aveAgreedOp / opCounter;
+            aveAgreedpd = aveAgreedpd / pdCounter;
+            aveAgreedcm = aveAgreedcm / cmCounter;
+            aveAgreedrs = aveAgreedrs / rsCounter;
+            aveQop = calculateAvePerQuarter(opCounter, aveQop);
+            aveQpd = calculateAvePerQuarter(pdCounter, aveQpd);
+            aveQcm = calculateAvePerQuarter(cmCounter, aveQcm);
+            aveQrs = calculateAvePerQuarter(rsCounter, aveQrs);
+
+
+
+            $("#completeTable").append($("<tr><td><a href='https://versummaterials.sharepoint.com/sites/VMO/Lists/Partner%20ScoreCardCAI/Allitemsg.aspx' target='_blank'>CAI</a></td><td>" + signsForStatus("op", arrayAgreedOp, aveAgreedOp) + "</td><td>" + signsForStatus("pd", arrayAgreedPd, aveAgreedpd) + "</td><td>" + signsForStatus("cm", arrayAgreedCm, aveAgreedcm) + "</td><td>" + signsForStatus("rs", arrayAgreedRs, aveAgreedrs) + "</td><td><button id='CAIChartButton' type='button' class='btn btn-info' data-toggle='modal' data-target='#myModal'><i class='fas fa-chart-line fa-2x''></i></button></td></tr>"));
+            $("#CAIChartButton").click(function() {
+                populateChart(libName, aveQop, aveQpd, aveQcm, aveQrs);
+            });
+
+            retrieveListItemsCompleteHitachi();
+
+        }
+
+        function CAIFailed(sender, args) {
+            alert('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+        }
+        //---CAI--FIN----------------------------------------------------------------------------------------------------------------
+
+        //---Hitachi--Start----------------------------------------------------------------------------------------------------------------
+        function retrieveListItemsCompleteHitachi() { //Hitachi
+
+            var siteUrl = _spPageContextInfo.webServerRelativeUrl;
+            var clientContext = new SP.ClientContext(siteUrl);
+            var oListHitachi = clientContext.get_web().get_lists().getByTitle('Partner ScoreCard-Hitachi');
+            var camlQuery = new SP.CamlQuery();
+            var query = SP.CamlQuery.createAllItemsQuery();
+            this.collListItem = oListHitachi.getItems(query);
+            clientContext.load(collListItem);
+            clientContext.executeQueryAsync(Function.createDelegate(this, this.HitachiSucceeded), Function.createDelegate(this, this.HitachiFailed));
+        }
+
+        function HitachiSucceeded(sender, args) {
+            // --- Variable nomenclature and meanings 
+            //op = Operational
+            //pd = Project / Delivery
+            //cm = Commercial / Finance
+            //rs = Relationship
+            //op1 = SLA/KPI compliance
+            //op2 = Quality of Support, Service or Product
+            //op3 = Operations Change Management
+            //op4 = Technical knowledge
+            //op5 = Regulatory & Compliance
+            //pd1 = Proper Planning , Ownership, Risk management & Mitigation
+            //pd2 = Project Management (resourcing, communication..)
+            //cm1 = Price competitiveness
+            //cm2 = SOW's, Contact changes,  Invoices
+            //cm3 = Financial variance
+            //cm4 = Cost Savings
+            //cm5 = console.log(oListItem);
+            //rs1 = Innovation
+            //rs2 = Effectiveness of Account Team
+            //rs3 = Effective strategic communications and alignment between companies
+            //rs4 = Effective relationship building
+            var libName = "Hitachi";
+            var opCounter = 0;
+            var pdCounter = 0;
+            var cmCounter = 0;
+            var rsCounter = 0;
+            var aveAgreedOp = 0;
+            var aveAgreedpd = 0;
+            var aveAgreedcm = 0;
+            var aveAgreedrs = 0;
+            var aveQop = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQpd = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQcm = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQrs = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var arrayAgreedOp = [];
+            var arrayAgreedPd = [];
+            var arrayAgreedCm = [];
+            var arrayAgreedRs = [];
+
+            var listItemEnumerator = collListItem.getEnumerator();
+            while (listItemEnumerator.moveNext()) {
+                var oListItem = listItemEnumerator.get_current();
+                //                console.log(oListItem);
+                if (oListItem.get_item("Metric") == "Operational") {
+                    opCounter++;
+                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQop = counterEachQuarter(libName, aveQop, oListItem);
+                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Project/Delivery") {
+                    pdCounter++;
+                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQpd = counterEachQuarter(libName, aveQpd, oListItem);
+                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Commercial/Financial") {
+                    cmCounter++;
+                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQcm = counterEachQuarter(libName, aveQcm, oListItem);
+                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Relationship") {
+                    rsCounter++;
+                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQrs = counterEachQuarter(libName, aveQrs, oListItem);
+                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                }
+
+            }
+
+            aveAgreedOp = aveAgreedOp / opCounter;
+            aveAgreedpd = aveAgreedpd / pdCounter;
+            aveAgreedcm = aveAgreedcm / cmCounter;
+            aveAgreedrs = aveAgreedrs / rsCounter;
+            aveQop = calculateAvePerQuarter(opCounter, aveQop);
+            aveQpd = calculateAvePerQuarter(pdCounter, aveQpd);
+            aveQcm = calculateAvePerQuarter(cmCounter, aveQcm);
+            aveQrs = calculateAvePerQuarter(rsCounter, aveQrs);
+
+
+
+            $("#completeTable").append($("<tr><td><a href='https://versummaterials.sharepoint.com/sites/VMO/Lists/Partner%20ScoreCardHitachi/Allitemsg.aspx' target='_blank'>Hitachi</a></td><td>" + signsForStatus("op", arrayAgreedOp, aveAgreedOp) + "</td><td>" + signsForStatus("pd", arrayAgreedPd, aveAgreedpd) + "</td><td>" + signsForStatus("cm", arrayAgreedCm, aveAgreedcm) + "</td><td>" + signsForStatus("rs", arrayAgreedRs, aveAgreedrs) + "</td><td><button id='HitachiChartButton' type='button' class='btn btn-info' data-toggle='modal' data-target='#myModal'><i class='fas fa-chart-line fa-2x''></i></button></td></tr>"));
+            $("#HitachiChartButton").click(function() {
+                populateChart(libName, aveQop, aveQpd, aveQcm, aveQrs);
+            });
+            retrieveListItemsCompleteInfosys(); //<------- Calling next List
+
+        }
+
+        function HitachiFailed(sender, args) {
+            alert('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+        }
+        //---Hitachi--FIN----------------------------------------------------------------------------------------------------------------
+
+        //---Infosys--Start----------------------------------------------------------------------------------------------------------------
+        function retrieveListItemsCompleteInfosys() { //Infosys
+
+            var siteUrl = _spPageContextInfo.webServerRelativeUrl;
+            var clientContext = new SP.ClientContext(siteUrl);
+            var oListInfosys = clientContext.get_web().get_lists().getByTitle('PartnerScoreCard-INFOSYS');
+            var camlQuery = new SP.CamlQuery();
+            var query = SP.CamlQuery.createAllItemsQuery();
+            this.collListItem = oListInfosys.getItems(query);
+            clientContext.load(collListItem);
+            clientContext.executeQueryAsync(Function.createDelegate(this, this.InfosysSucceeded), Function.createDelegate(this, this.InfosysFailed));
+        }
+
+        function InfosysSucceeded(sender, args) {
+            // --- Variable nomenclature and meanings 
+            //op = Operational
+            //pd = Project / Delivery
+            //cm = Commercial / Finance
+            //rs = Relationship
+            //op1 = SLA/KPI compliance
+            //op2 = Quality of Support, Service or Product
+            //op3 = Operations Change Management
+            //op4 = Technical knowledge
+            //op5 = Regulatory & Compliance
+            //pd1 = Proper Planning , Ownership, Risk management & Mitigation
+            //pd2 = Project Management (resourcing, communication..)
+            //cm1 = Price competitiveness
+            //cm2 = SOW's, Contact changes,  Invoices
+            //cm3 = Financial variance
+            //cm4 = Cost Savings
+            //cm5 = console.log(oListItem);
+            //rs1 = Innovation
+            //rs2 = Effectiveness of Account Team
+            //rs3 = Effective strategic communications and alignment between companies
+            //rs4 = Effective relationship building
+            var libName = "Infosys";
+            var opCounter = 0;
+            var pdCounter = 0;
+            var cmCounter = 0;
+            var rsCounter = 0;
+            var aveAgreedOp = 0;
+            var aveAgreedpd = 0;
+            var aveAgreedcm = 0;
+            var aveAgreedrs = 0;
+            var aveQop = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQpd = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQcm = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQrs = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var arrayAgreedOp = [];
+            var arrayAgreedPd = [];
+            var arrayAgreedCm = [];
+            var arrayAgreedRs = [];
+
+            var listItemEnumerator = collListItem.getEnumerator();
+            while (listItemEnumerator.moveNext()) {
+                var oListItem = listItemEnumerator.get_current();
+                //console.log(oListItem);
+                if (oListItem.get_item("Metric") == "Operational") {
+                    opCounter++;
+                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQop = counterEachQuarter(libName, aveQop, oListItem);
+                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Project/Delivery") {
+                    pdCounter++;
+                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQpd = counterEachQuarter(libName, aveQpd, oListItem);
+                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Commercial/Financial") {
+                    cmCounter++;
+                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQcm = counterEachQuarter(libName, aveQcm, oListItem);
+                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Relationship") {
+                    rsCounter++;
+                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQrs = counterEachQuarter(libName, aveQrs, oListItem);
+                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                }
+
+            }
+
+            aveAgreedOp = aveAgreedOp / opCounter;
+            aveAgreedpd = aveAgreedpd / pdCounter;
+            aveAgreedcm = aveAgreedcm / cmCounter;
+            aveAgreedrs = aveAgreedrs / rsCounter;
+            aveQop = calculateAvePerQuarter(opCounter, aveQop);
+            aveQpd = calculateAvePerQuarter(pdCounter, aveQpd);
+            aveQcm = calculateAvePerQuarter(cmCounter, aveQcm);
+            aveQrs = calculateAvePerQuarter(rsCounter, aveQrs);
+
+
+
+            $("#completeTable").append($("<tr><td><a href='https://versummaterials.sharepoint.com/sites/VMO/Lists/PartnerScoreCardPerformanceMgmt/Allitemsg.aspx' target='_blank'>Infosys</a></td><td>" + signsForStatus("op", arrayAgreedOp, aveAgreedOp) + "</td><td>" + signsForStatus("pd", arrayAgreedPd, aveAgreedpd) + "</td><td>" + signsForStatus("cm", arrayAgreedCm, aveAgreedcm) + "</td><td>" + signsForStatus("rs", arrayAgreedRs, aveAgreedrs) + "</td><td><button id='InfosysChartButton' type='button' class='btn btn-info' data-toggle='modal' data-target='#myModal'><i class='fas fa-chart-line fa-2x''></i></button></td></tr>"));
+            $("#InfosysChartButton").click(function() {
+                populateChart(libName, aveQop, aveQpd, aveQcm, aveQrs);
+            });
+            retrieveListItemsCompleteMicrosoft(); //<------- Calling next List
+
+        }
+
+        function InfosysFailed(sender, args) {
+            alert('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+        }
+        //---Infosys--FIN----------------------------------------------------------------------------------------------------------------
+
+        //---Microsoft--Start----------------------------------------------------------------------------------------------------------------
+        function retrieveListItemsCompleteMicrosoft() { //Microsoft
+
+            var siteUrl = _spPageContextInfo.webServerRelativeUrl;
+            var clientContext = new SP.ClientContext(siteUrl);
+            var oListMicrosoft = clientContext.get_web().get_lists().getByTitle('Partner ScoreCard-Microsoft');
+            var camlQuery = new SP.CamlQuery();
+            var query = SP.CamlQuery.createAllItemsQuery();
+            this.collListItem = oListMicrosoft.getItems(query);
+            clientContext.load(collListItem);
+            clientContext.executeQueryAsync(Function.createDelegate(this, this.MicrosoftSucceeded), Function.createDelegate(this, this.MicrosoftFailed));
+        }
+
+        function MicrosoftSucceeded(sender, args) {
+            // --- Variable nomenclature and meanings 
+            //op = Operational
+            //pd = Project / Delivery
+            //cm = Commercial / Finance
+            //rs = Relationship
+            //op1 = SLA/KPI compliance
+            //op2 = Quality of Support, Service or Product
+            //op3 = Operations Change Management
+            //op4 = Technical knowledge
+            //op5 = Regulatory & Compliance
+            //pd1 = Proper Planning , Ownership, Risk management & Mitigation
+            //pd2 = Project Management (resourcing, communication..)
+            //cm1 = Price competitiveness
+            //cm2 = SOW's, Contact changes,  Invoices
+            //cm3 = Financial variance
+            //cm4 = Cost Savings
+            //cm5 = console.log(oListItem);
+            //rs1 = Innovation
+            //rs2 = Effectiveness of Account Team
+            //rs3 = Effective strategic communications and alignment between companies
+            //rs4 = Effective relationship building
+            var libName = "Microsoft";
+            var opCounter = 0;
+            var pdCounter = 0;
+            var cmCounter = 0;
+            var rsCounter = 0;
+            var aveAgreedOp = 0;
+            var aveAgreedpd = 0;
+            var aveAgreedcm = 0;
+            var aveAgreedrs = 0;
+            var aveQop = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQpd = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQcm = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQrs = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var arrayAgreedOp = [];
+            var arrayAgreedPd = [];
+            var arrayAgreedCm = [];
+            var arrayAgreedRs = [];
+
+            var listItemEnumerator = collListItem.getEnumerator();
+            while (listItemEnumerator.moveNext()) {
+                var oListItem = listItemEnumerator.get_current();
+                //                console.log(oListItem);
+                if (oListItem.get_item("Metric") == "Operational") {
+                    opCounter++;
+                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQop = counterEachQuarter(libName, aveQop, oListItem);
+                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Project/Delivery") {
+                    pdCounter++;
+                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQpd = counterEachQuarter(libName, aveQpd, oListItem);
+                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Commercial/Financial") {
+                    cmCounter++;
+                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQcm = counterEachQuarter(libName, aveQcm, oListItem);
+                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Relationship") {
+                    rsCounter++;
+                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQrs = counterEachQuarter(libName, aveQrs, oListItem);
+                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                }
+
+            }
+
+            aveAgreedOp = aveAgreedOp / opCounter;
+            aveAgreedpd = aveAgreedpd / pdCounter;
+            aveAgreedcm = aveAgreedcm / cmCounter;
+            aveAgreedrs = aveAgreedrs / rsCounter;
+            aveQop = calculateAvePerQuarter(opCounter, aveQop);
+            aveQpd = calculateAvePerQuarter(pdCounter, aveQpd);
+            aveQcm = calculateAvePerQuarter(cmCounter, aveQcm);
+            aveQrs = calculateAvePerQuarter(rsCounter, aveQrs);
+
+
+
+            $("#completeTable").append($("<tr><td><a href='https://versummaterials.sharepoint.com/sites/VMO/Lists/Partner%20ScoreCardMicrosoft/Allitemsg.aspx' target='_blank'>Microsoft</a></td><td>" + signsForStatus("op", arrayAgreedOp, aveAgreedOp) + "</td><td>" + signsForStatus("pd", arrayAgreedPd, aveAgreedpd) + "</td><td>" + signsForStatus("cm", arrayAgreedCm, aveAgreedcm) + "</td><td>" + signsForStatus("rs", arrayAgreedRs, aveAgreedrs) + "</td><td><button id='MicrosoftChartButton' type='button' class='btn btn-info' data-toggle='modal' data-target='#myModal'><i class='fas fa-chart-line fa-2x''></i></button></td></tr>"));
+            $("#MicrosoftChartButton").click(function() {
+                populateChart(libName, aveQop, aveQpd, aveQcm, aveQrs);
+            });
+            retrieveListItemsCompleteSAP(); //<------- Calling next List
+
+        }
+
+        function MicrosoftFailed(sender, args) {
+            alert('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+        }
+        //---Microsoft--FIN----------------------------------------------------------------------------------------------------------------
+
+        //---SAP--Start----------------------------------------------------------------------------------------------------------------
+        function retrieveListItemsCompleteSAP() { //SAP
+
+            var siteUrl = _spPageContextInfo.webServerRelativeUrl;
+            var clientContext = new SP.ClientContext(siteUrl);
+            var oListSAP = clientContext.get_web().get_lists().getByTitle('Partner ScoreCard-SAP');
+            var camlQuery = new SP.CamlQuery();
+            var query = SP.CamlQuery.createAllItemsQuery();
+            this.collListItem = oListSAP.getItems(query);
+            clientContext.load(collListItem);
+            clientContext.executeQueryAsync(Function.createDelegate(this, this.SAPSucceeded), Function.createDelegate(this, this.SAPFailed));
+        }
+
+        function SAPSucceeded(sender, args) {
+            // --- Variable nomenclature and meanings 
+            //op = Operational
+            //pd = Project / Delivery
+            //cm = Commercial / Finance
+            //rs = Relationship
+            //op1 = SLA/KPI compliance
+            //op2 = Quality of Support, Service or Product
+            //op3 = Operations Change Management
+            //op4 = Technical knowledge
+            //op5 = Regulatory & Compliance
+            //pd1 = Proper Planning , Ownership, Risk management & Mitigation
+            //pd2 = Project Management (resourcing, communication..)
+            //cm1 = Price competitiveness
+            //cm2 = SOW's, Contact changes,  Invoices
+            //cm3 = Financial variance
+            //cm4 = Cost Savings
+            //cm5 = console.log(oListItem);
+            //rs1 = Innovation
+            //rs2 = Effectiveness of Account Team
+            //rs3 = Effective strategic communications and alignment between companies
+            //rs4 = Effective relationship building
+            var libName = "SAP";
+            var opCounter = 0;
+            var pdCounter = 0;
+            var cmCounter = 0;
+            var rsCounter = 0;
+            var aveAgreedOp = 0;
+            var aveAgreedpd = 0;
+            var aveAgreedcm = 0;
+            var aveAgreedrs = 0;
+            var aveQop = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQpd = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQcm = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQrs = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var arrayAgreedOp = [];
+            var arrayAgreedPd = [];
+            var arrayAgreedCm = [];
+            var arrayAgreedRs = [];
+
+            var listItemEnumerator = collListItem.getEnumerator();
+            while (listItemEnumerator.moveNext()) {
+                var oListItem = listItemEnumerator.get_current();
+//                console.log(oListItem);
+                if (oListItem.get_item("Metric") == "Operational") {
+                    opCounter++;
+                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQop = counterEachQuarter(libName, aveQop, oListItem);
+                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Project/Delivery") {
+                    pdCounter++;
+                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQpd = counterEachQuarter(libName, aveQpd, oListItem);
+                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Commercial/Financial") {
+                    cmCounter++;
+                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQcm = counterEachQuarter(libName, aveQcm, oListItem);
+                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Relationship") {
+                    rsCounter++;
+                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQrs = counterEachQuarter(libName, aveQrs, oListItem);
+                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                }
+
+            }
+
+            aveAgreedOp = aveAgreedOp / opCounter;
+            aveAgreedpd = aveAgreedpd / pdCounter;
+            aveAgreedcm = aveAgreedcm / cmCounter;
+            aveAgreedrs = aveAgreedrs / rsCounter;
+            aveQop = calculateAvePerQuarter(opCounter, aveQop);
+            aveQpd = calculateAvePerQuarter(pdCounter, aveQpd);
+            aveQcm = calculateAvePerQuarter(cmCounter, aveQcm);
+            aveQrs = calculateAvePerQuarter(rsCounter, aveQrs);
+
+
+
+            $("#completeTable").append($("<tr><td><a href='https://versummaterials.sharepoint.com/sites/VMO/Lists/Partner%20ScoreCardSAP/Allitemsg.aspx' target='_blank'>SAP</a></td><td>" + signsForStatus("op", arrayAgreedOp, aveAgreedOp) + "</td><td>" + signsForStatus("pd", arrayAgreedPd, aveAgreedpd) + "</td><td>" + signsForStatus("cm", arrayAgreedCm, aveAgreedcm) + "</td><td>" + signsForStatus("rs", arrayAgreedRs, aveAgreedrs) + "</td><td><button id='SAPChartButton' type='button' class='btn btn-info' data-toggle='modal' data-target='#myModal'><i class='fas fa-chart-line fa-2x''></i></button></td></tr>"));
+            $("#SAPChartButton").click(function() {
+                populateChart(libName, aveQop, aveQpd, aveQcm, aveQrs);
+            });
+            retrieveListItemsCompleteSecureworks(); //<------- Calling next List
+
+        }
+
+        function SAPFailed(sender, args) {
+            alert('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+        }
+        //---SAP--FIN----------------------------------------------------------------------------------------------------------------
+
+        //---Secureworks--Start----------------------------------------------------------------------------------------------------------------
+        function retrieveListItemsCompleteSecureworks() { //Secureworks
+
+            var siteUrl = _spPageContextInfo.webServerRelativeUrl;
+            var clientContext = new SP.ClientContext(siteUrl);
+            var oListSecureworks = clientContext.get_web().get_lists().getByTitle('Partner ScoreCard-Secureworks');
+            var camlQuery = new SP.CamlQuery();
+            var query = SP.CamlQuery.createAllItemsQuery();
+            this.collListItem = oListSecureworks.getItems(query);
+            clientContext.load(collListItem);
+            clientContext.executeQueryAsync(Function.createDelegate(this, this.SecureworksSucceeded), Function.createDelegate(this, this.SecureworksFailed));
+        }
+
+        function SecureworksSucceeded(sender, args) {
+            // --- Variable nomenclature and meanings 
+            //op = Operational
+            //pd = Project / Delivery
+            //cm = Commercial / Finance
+            //rs = Relationship
+            //op1 = SLA/KPI compliance
+            //op2 = Quality of Support, Service or Product
+            //op3 = Operations Change Management
+            //op4 = Technical knowledge
+            //op5 = Regulatory & Compliance
+            //pd1 = Proper Planning , Ownership, Risk management & Mitigation
+            //pd2 = Project Management (resourcing, communication..)
+            //cm1 = Price competitiveness
+            //cm2 = SOW's, Contact changes,  Invoices
+            //cm3 = Financial variance
+            //cm4 = Cost Savings
+            //cm5 = console.log(oListItem);
+            //rs1 = Innovation
+            //rs2 = Effectiveness of Account Team
+            //rs3 = Effective strategic communications and alignment between companies
+            //rs4 = Effective relationship building
+            var libName = "Secureworks";
+            var opCounter = 0;
+            var pdCounter = 0;
+            var cmCounter = 0;
+            var rsCounter = 0;
+            var aveAgreedOp = 0;
+            var aveAgreedpd = 0;
+            var aveAgreedcm = 0;
+            var aveAgreedrs = 0;
+            var aveQop = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQpd = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQcm = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQrs = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var arrayAgreedOp = [];
+            var arrayAgreedPd = [];
+            var arrayAgreedCm = [];
+            var arrayAgreedRs = [];
+
+            var listItemEnumerator = collListItem.getEnumerator();
+            while (listItemEnumerator.moveNext()) {
+                var oListItem = listItemEnumerator.get_current();
+                                console.log(oListItem);
+                if (oListItem.get_item("Metric") == "Operational") {
+                    opCounter++;
+                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQop = counterEachQuarter(libName, aveQop, oListItem);
+                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Project/Delivery") {
+                    pdCounter++;
+                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQpd = counterEachQuarter(libName, aveQpd, oListItem);
+                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Commercial/Financial") {
+                    cmCounter++;
+                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQcm = counterEachQuarter(libName, aveQcm, oListItem);
+                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Relationship") {
+                    rsCounter++;
+                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQrs = counterEachQuarter(libName, aveQrs, oListItem);
+                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                }
+
+            }
+
+            aveAgreedOp = aveAgreedOp / opCounter;
+            aveAgreedpd = aveAgreedpd / pdCounter;
+            aveAgreedcm = aveAgreedcm / cmCounter;
+            aveAgreedrs = aveAgreedrs / rsCounter;
+            aveQop = calculateAvePerQuarter(opCounter, aveQop);
+            aveQpd = calculateAvePerQuarter(pdCounter, aveQpd);
+            aveQcm = calculateAvePerQuarter(cmCounter, aveQcm);
+            aveQrs = calculateAvePerQuarter(rsCounter, aveQrs);
+
+
+
+            $("#completeTable").append($("<tr><td><a href='https://versummaterials.sharepoint.com/sites/VMO/Lists/Partner%20ScoreCardSecureworks/Allitemsg.aspx' target='_blank'>Secureworks</a></td><td>" + signsForStatus("op", arrayAgreedOp, aveAgreedOp) + "</td><td>" + signsForStatus("pd", arrayAgreedPd, aveAgreedpd) + "</td><td>" + signsForStatus("cm", arrayAgreedCm, aveAgreedcm) + "</td><td>" + signsForStatus("rs", arrayAgreedRs, aveAgreedrs) + "</td><td><button id='SecureworksChartButton' type='button' class='btn btn-info' data-toggle='modal' data-target='#myModal'><i class='fas fa-chart-line fa-2x''></i></button></td></tr>"));
+            $("#SecureworksChartButton").click(function() {
+                populateChart(libName, aveQop, aveQpd, aveQcm, aveQrs);
+            });
+            retrieveListItemsCompleteVirtela(); //<------- Calling next List
+
+        }
+
+        function SecureworksFailed(sender, args) {
+            alert('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+        }
+        //---Secureworks--FIN----------------------------------------------------------------------------------------------------------------
+
+        //---Virtela--Start----------------------------------------------------------------------------------------------------------------
+        function retrieveListItemsCompleteVirtela() { //Virtela
+
+            var siteUrl = _spPageContextInfo.webServerRelativeUrl;
+            var clientContext = new SP.ClientContext(siteUrl);
+            var oListVirtela = clientContext.get_web().get_lists().getByTitle('Partner ScoreCard-Virtela');
+            var camlQuery = new SP.CamlQuery();
+            var query = SP.CamlQuery.createAllItemsQuery();
+            this.collListItem = oListVirtela.getItems(query);
+            clientContext.load(collListItem);
+            clientContext.executeQueryAsync(Function.createDelegate(this, this.VirtelaSucceeded), Function.createDelegate(this, this.VirtelaFailed));
+        }
+
+        function VirtelaSucceeded(sender, args) {
+            // --- Variable nomenclature and meanings 
+            //op = Operational
+            //pd = Project / Delivery
+            //cm = Commercial / Finance
+            //rs = Relationship
+            //op1 = SLA/KPI compliance
+            //op2 = Quality of Support, Service or Product
+            //op3 = Operations Change Management
+            //op4 = Technical knowledge
+            //op5 = Regulatory & Compliance
+            //pd1 = Proper Planning , Ownership, Risk management & Mitigation
+            //pd2 = Project Management (resourcing, communication..)
+            //cm1 = Price competitiveness
+            //cm2 = SOW's, Contact changes,  Invoices
+            //cm3 = Financial variance
+            //cm4 = Cost Savings
+            //cm5 = console.log(oListItem);
+            //rs1 = Innovation
+            //rs2 = Effectiveness of Account Team
+            //rs3 = Effective strategic communications and alignment between companies
+            //rs4 = Effective relationship building
+            var libName = "Virtela";
+            var opCounter = 0;
+            var pdCounter = 0;
+            var cmCounter = 0;
+            var rsCounter = 0;
+            var aveAgreedOp = 0;
+            var aveAgreedpd = 0;
+            var aveAgreedcm = 0;
+            var aveAgreedrs = 0;
+            var aveQop = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQpd = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQcm = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var aveQrs = {
+                aveQ1: 0,
+                aveQ2: 0,
+                aveQ3: 0,
+                aveQ4: 0
+            }
+            var arrayAgreedOp = [];
+            var arrayAgreedPd = [];
+            var arrayAgreedCm = [];
+            var arrayAgreedRs = [];
+
+            var listItemEnumerator = collListItem.getEnumerator();
+            while (listItemEnumerator.moveNext()) {
+                var oListItem = listItemEnumerator.get_current();
+                //                console.log(oListItem);
+                if (oListItem.get_item("Metric") == "Operational") {
+                    opCounter++;
+                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQop = counterEachQuarter(libName, aveQop, oListItem);
+                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Project/Delivery") {
+                    pdCounter++;
+                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQpd = counterEachQuarter(libName, aveQpd, oListItem);
+                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Commercial/Financial") {
+                    cmCounter++;
+                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQcm = counterEachQuarter(libName, aveQcm, oListItem);
+                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                } else if (oListItem.get_item("Metric") == "Relationship") {
+                    rsCounter++;
+                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveQrs = counterEachQuarter(libName, aveQrs, oListItem);
+                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                }
+
+            }
+
+            aveAgreedOp = aveAgreedOp / opCounter;
+            aveAgreedpd = aveAgreedpd / pdCounter;
+            aveAgreedcm = aveAgreedcm / cmCounter;
+            aveAgreedrs = aveAgreedrs / rsCounter;
+            aveQop = calculateAvePerQuarter(opCounter, aveQop);
+            aveQpd = calculateAvePerQuarter(pdCounter, aveQpd);
+            aveQcm = calculateAvePerQuarter(cmCounter, aveQcm);
+            aveQrs = calculateAvePerQuarter(rsCounter, aveQrs);
+
+
+
+            $("#completeTable").append($("<tr><td><a href='https://versummaterials.sharepoint.com/sites/VMO/Lists/Partner%20ScoreCardVirtela/Allitemsg.aspx' target='_blank'>Virtela</a></td><td>" + signsForStatus("op", arrayAgreedOp, aveAgreedOp) + "</td><td>" + signsForStatus("pd", arrayAgreedPd, aveAgreedpd) + "</td><td>" + signsForStatus("cm", arrayAgreedCm, aveAgreedcm) + "</td><td>" + signsForStatus("rs", arrayAgreedRs, aveAgreedrs) + "</td><td><button id='VirtelaChartButton' type='button' class='btn btn-info' data-toggle='modal' data-target='#myModal'><i class='fas fa-chart-line fa-2x''></i></button></td></tr>"));
+            $("#VirtelaChartButton").click(function() {
+                populateChart(libName, aveQop, aveQpd, aveQcm, aveQrs);
+            });
+            //NEXT COMPANY();//<------- END OF LIST, DO NOT CALL NEXT
+
+        }
+
+        function VirtelaFailed(sender, args) {
+            alert('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+        }
+        //---Virtela--FIN----------------------------------------------------------------------------------------------------------------
+
+        //---Common functions--Start----------------------------------------------------------------------------------------------------------------
+
+
+        function getQuarter(listName, itemObject) {
+            if (listName == "Infosys") {
+                var quarters = {
+                    Q1: itemObject.get_item('Month_x0020_1'),
+                    Q2: itemObject.get_item('ht7j'),
+                    Q3: itemObject.get_item('cryx'),
+                    Q4: itemObject.get_item('e03i')
+                }
+            } else if (listName == "SAP") {
+                var quarters = {
+                    Q1: itemObject.get_item('Current_x0020_Month_x003a__x00201'),
+                    Q2: itemObject.get_item('Current_x0020_QTR'),
+                    Q3: itemObject.get_item('xtpu'),
+                    Q4: itemObject.get_item('Trend_x003a__x0020_Last_x0020_30')
+                }
+            } else if (listName == "Secureworks") {
+                var quarters = {
+                    Q1: itemObject.get_item('Current_x0020_Month_x003a__x00201'),
+                    Q2: itemObject.get_item('Current_x0020_QTR'),
+                    Q3: itemObject.get_item('_x0069_f56'),
+                    Q4: itemObject.get_item('gcjs')
+                }
+            } else {
+                var quarters = {
+                    Q1: itemObject.get_item('Current_x0020_QTR'),
+                    Q2: itemObject.get_item('xtpu'),
+                    Q3: itemObject.get_item('Trend_x003a__x0020_Last_x0020_30'),
+                    Q4: itemObject.get_item('Month_x0020_1')
+                }
+            }
+
+            return quarters;
+        }
+
+        function counterEachQuarter(listName, qObject, itemObject) {
+            var counterQuarter = {
+                aveQ1: qObject.aveQ1 + getQuarter(listName, itemObject).Q1,
+                aveQ2: qObject.aveQ2 + getQuarter(listName, itemObject).Q2,
+                aveQ3: qObject.aveQ3 + getQuarter(listName, itemObject).Q3,
+                aveQ4: qObject.aveQ4 + getQuarter(listName, itemObject).Q4
+            }
+            return counterQuarter;
+        }
+
+        function calculateAvePerQuarter(counter, quarterObject) {
+            var aveQuarter = {
+                aveQ1: (quarterObject.aveQ1 / counter),
+                aveQ2: (quarterObject.aveQ2 / counter),
+                aveQ3: (quarterObject.aveQ3 / counter),
+                aveQ4: (quarterObject.aveQ4 / counter),
+            }
+            aveQuarter.aveQ1 = (aveQuarter.aveJan == 0) ? aveQuarter.aveQ1 = null : aveQuarter.aveQ1;
+            aveQuarter.aveQ2 = (aveQuarter.aveQ2 == 0) ? aveQuarter.aveQ2 = null : aveQuarter.aveQ2;
+            aveQuarter.aveQ3 = (aveQuarter.aveQ3 == 0) ? aveQuarter.aveQ3 = null : aveQuarter.aveQ3;
+            aveQuarter.aveQ4 = (aveQuarter.aveQ4 == 0) ? aveQuarter.aveQ4 = null : aveQuarter.aveQ4;
+            return aveQuarter;
+        }
+
+        function signsForStatus(category, arrayOlist, avAgreed) {
+            $('[data-toggle="tooltip"]').tooltip();
+            avAgreed = avAgreed.toFixed(1);
+            var sign = "<span style='background-color:grey' class='dot' aria-hidden='true'></span>";
+            var toolTip = "Something is not working";
+            if (category == "op") {
+                //                toolTip = "<h4>Operational</h4><ul><li>SLA/KPI compliance: <b>" + arrayOlist[0] + "</b></li><li>Quality of Support, Service or Product: <b>" + arrayOlist[1] + "</b></li><li>Operations Change Management: <b>" + arrayOlist[2] + "</b></li><li>Technical knowledge: <b>" + arrayOlist[3] + "</b></li><li>Regulatory & Compliance: <b>" + arrayOlist[4] + "</b></li><li><b>Average Operational: <u>" + arrayOlist[5] + "</u></b></li></ul>";
+                //toolTip = "Testing";
+            } else if (category == "pd") {
+                toolTip = "";
+            } else if (category == "cm") {
+                toolTip = "";
+            } else if (category == "rs") {
+                toolTip = "";
+            }
+            if (avAgreed >= 3) {
+                //sign = "<span style='background-color:green' class='dot' aria-hidden='true'></span>";
+                //sign = "<button type='button' class='btn' data-toggle='tooltip' data-html='true' title='hola'>Tooltip with HTML</button>"
+                //                sign = "<div id='greenSign' class='numberCircle' style='background: #28ef4a;' title='" + toolTip + "'>" + avAgreed + "</div>";
+                //tippy(".numberCircle");
+                sign = "<div id='greenSign' class='numberCircle' style='background: #28ef4a;'>" + avAgreed + "</div>";
+            } else if (avAgreed <= 0) {
+                //sign = "<span style='background-color:red' class='dot' aria-hidden='true'></span>";
+                sign = "<div id='redSign' class='numberCircle' style='background: #ff4545;'>" + avAgreed + "</div>";
+            } else if (avAgreed < 3 && avAgreed > 0) {
+                //sign = "<span style='background-color:yellow' class='dot' aria-hidden='true'></span>";
+                sign = "<div id='yellowSign' class='numberCircle' style='background: yellow;'>" + avAgreed + "</div>";
+            }
+            return sign;
+        }
+
+        function populateChart(company, quarterOp, quarterPd, quarterCm, quarterhRs) {
+            $("#companyChart").text(company);
+            var op = {
+                x: ["Q1", "Q2", "Q3", "Q4"],
+                y: [quarterOp.aveQ1, quarterOp.aveQ2, quarterOp.aveQ3, quarterOp.aveQ4], //Data
+                type: 'scatter',
+                name: 'Operational',
+            };
+            var pd = {
+                x: ["Q1", "Q2", "Q3", "Q4"],
+                y: [quarterPd.aveQ1, quarterPd.aveQ2, quarterPd.aveQ3, quarterPd.aveQ4], //Data
+                type: 'scatter',
+                name: 'Project / Delivery',
+            };
+            var cm = {
+                x: ["Q1", "Q2", "Q3", "Q4"],
+                y: [quarterCm.aveQ1, quarterCm.aveQ2, quarterCm.aveQ3, quarterCm.aveQ4], //Data
+                type: 'scatter',
+                name: 'Commercial / Finance',
+            };
+            var rs = {
+                x: ["Q1", "Q2", "Q3", "Q4"],
+                y: [quarterhRs.aveQ1, quarterhRs.aveQ2, quarterhRs.aveQ3, quarterhRs.aveQ4], //Data
+                type: 'scatter',
+                name: 'Relationship',
+            };
+            var data = [op, pd, cm, rs];
+            Plotly.newPlot('myChart', data);
+        }
+        //---Common functions--FIN----------------------------------------------------------------------------------------------------------------
+    </script>
+</body>
+
+</html>
