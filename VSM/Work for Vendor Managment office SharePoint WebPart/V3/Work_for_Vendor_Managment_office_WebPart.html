@@ -183,29 +183,30 @@
             var arrayAgreedRs = [];
 
             var listItemEnumerator = collListItem.getEnumerator();
+            console.log("Accenture");
             while (listItemEnumerator.moveNext()) {
                 var oListItem = listItemEnumerator.get_current();
-                //console.log(oListItem);
+                console.log(oListItem);
                 if (oListItem.get_item("Metric") == "Operational") {
                     opCounter++;
-                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQop = counterEachQuarter(libName, aveQop, oListItem);
-                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Project/Delivery") {
                     pdCounter++;
-                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQpd = counterEachQuarter(libName, aveQpd, oListItem);
-                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Commercial/Financial") {
                     cmCounter++;
-                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQcm = counterEachQuarter(libName, aveQcm, oListItem);
-                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Relationship") {
                     rsCounter++;
-                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQrs = counterEachQuarter(libName, aveQrs, oListItem);
-                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 }
 
             }
@@ -308,29 +309,30 @@
             var arrayAgreedRs = [];
 
             var listItemEnumerator = collListItem.getEnumerator();
+            console.log("CAI");
             while (listItemEnumerator.moveNext()) {
                 var oListItem = listItemEnumerator.get_current();
-                //                console.log(oListItem);
+                                console.log(oListItem);
                 if (oListItem.get_item("Metric") == "Operational") {
                     opCounter++;
-                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQop = counterEachQuarter(libName, aveQop, oListItem);
-                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Project/Delivery") {
                     pdCounter++;
-                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQpd = counterEachQuarter(libName, aveQpd, oListItem);
-                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Commercial/Financial") {
                     cmCounter++;
-                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQcm = counterEachQuarter(libName, aveQcm, oListItem);
-                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Relationship") {
                     rsCounter++;
-                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQrs = counterEachQuarter(libName, aveQrs, oListItem);
-                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 }
 
             }
@@ -434,29 +436,30 @@
             var arrayAgreedRs = [];
 
             var listItemEnumerator = collListItem.getEnumerator();
+                        console.log("Hitachi");
             while (listItemEnumerator.moveNext()) {
                 var oListItem = listItemEnumerator.get_current();
-                //                console.log(oListItem);
+                                console.log(oListItem);
                 if (oListItem.get_item("Metric") == "Operational") {
                     opCounter++;
-                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQop = counterEachQuarter(libName, aveQop, oListItem);
-                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Project/Delivery") {
                     pdCounter++;
-                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQpd = counterEachQuarter(libName, aveQpd, oListItem);
-                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Commercial/Financial") {
                     cmCounter++;
-                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQcm = counterEachQuarter(libName, aveQcm, oListItem);
-                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Relationship") {
                     rsCounter++;
-                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQrs = counterEachQuarter(libName, aveQrs, oListItem);
-                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 }
 
             }
@@ -559,29 +562,30 @@
             var arrayAgreedRs = [];
 
             var listItemEnumerator = collListItem.getEnumerator();
+            console.log("Infosys");
             while (listItemEnumerator.moveNext()) {
                 var oListItem = listItemEnumerator.get_current();
-                //console.log(oListItem);
+                console.log(oListItem);
                 if (oListItem.get_item("Metric") == "Operational") {
                     opCounter++;
-                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x00200"); // Column "Current Quarter: Versum"
                     aveQop = counterEachQuarter(libName, aveQop, oListItem);
-                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x00200")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Project/Delivery") {
                     pdCounter++;
-                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x00200"); // Column "Current Quarter: Versum"
                     aveQpd = counterEachQuarter(libName, aveQpd, oListItem);
-                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x00200")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Commercial/Financial") {
                     cmCounter++;
-                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x00200"); // Column "Current Quarter: Versum"
                     aveQcm = counterEachQuarter(libName, aveQcm, oListItem);
-                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x00200")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Relationship") {
                     rsCounter++;
-                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x00200"); // Column "Current Quarter: Versum"
                     aveQrs = counterEachQuarter(libName, aveQrs, oListItem);
-                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x00200")); // Column "Current Quarter: Versum"
                 }
 
             }
@@ -684,29 +688,30 @@
             var arrayAgreedRs = [];
 
             var listItemEnumerator = collListItem.getEnumerator();
+                        console.log("Microsoft");
             while (listItemEnumerator.moveNext()) {
                 var oListItem = listItemEnumerator.get_current();
-                //                console.log(oListItem);
+                                console.log(oListItem);
                 if (oListItem.get_item("Metric") == "Operational") {
                     opCounter++;
-                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQop = counterEachQuarter(libName, aveQop, oListItem);
-                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Project/Delivery") {
                     pdCounter++;
-                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQpd = counterEachQuarter(libName, aveQpd, oListItem);
-                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Commercial/Financial") {
                     cmCounter++;
-                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQcm = counterEachQuarter(libName, aveQcm, oListItem);
-                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Relationship") {
                     rsCounter++;
-                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQrs = counterEachQuarter(libName, aveQrs, oListItem);
-                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 }
 
             }
@@ -809,29 +814,30 @@
             var arrayAgreedRs = [];
 
             var listItemEnumerator = collListItem.getEnumerator();
+                        console.log("SAP");
             while (listItemEnumerator.moveNext()) {
                 var oListItem = listItemEnumerator.get_current();
-//                console.log(oListItem);
+                console.log(oListItem);
                 if (oListItem.get_item("Metric") == "Operational") {
                     opCounter++;
-                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQop = counterEachQuarter(libName, aveQop, oListItem);
-                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Project/Delivery") {
                     pdCounter++;
-                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQpd = counterEachQuarter(libName, aveQpd, oListItem);
-                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Commercial/Financial") {
                     cmCounter++;
-                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQcm = counterEachQuarter(libName, aveQcm, oListItem);
-                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Relationship") {
                     rsCounter++;
-                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQrs = counterEachQuarter(libName, aveQrs, oListItem);
-                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 }
 
             }
@@ -934,29 +940,30 @@
             var arrayAgreedRs = [];
 
             var listItemEnumerator = collListItem.getEnumerator();
+                        console.log("Secureworks");
             while (listItemEnumerator.moveNext()) {
                 var oListItem = listItemEnumerator.get_current();
                                 console.log(oListItem);
                 if (oListItem.get_item("Metric") == "Operational") {
                     opCounter++;
-                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQop = counterEachQuarter(libName, aveQop, oListItem);
-                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Project/Delivery") {
                     pdCounter++;
-                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQpd = counterEachQuarter(libName, aveQpd, oListItem);
-                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Commercial/Financial") {
                     cmCounter++;
-                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQcm = counterEachQuarter(libName, aveQcm, oListItem);
-                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Relationship") {
                     rsCounter++;
-                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQrs = counterEachQuarter(libName, aveQrs, oListItem);
-                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 }
 
             }
@@ -1059,29 +1066,30 @@
             var arrayAgreedRs = [];
 
             var listItemEnumerator = collListItem.getEnumerator();
+                        console.log("Vintella");
             while (listItemEnumerator.moveNext()) {
                 var oListItem = listItemEnumerator.get_current();
-                //                console.log(oListItem);
+                                console.log(oListItem);
                 if (oListItem.get_item("Metric") == "Operational") {
                     opCounter++;
-                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQop = counterEachQuarter(libName, aveQop, oListItem);
-                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedOp.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Project/Delivery") {
                     pdCounter++;
-                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedpd = aveAgreedpd + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQpd = counterEachQuarter(libName, aveQpd, oListItem);
-                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedPd.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Commercial/Financial") {
                     cmCounter++;
-                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedcm = aveAgreedcm + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQcm = counterEachQuarter(libName, aveQcm, oListItem);
-                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedCm.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 } else if (oListItem.get_item("Metric") == "Relationship") {
                     rsCounter++;
-                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x00201"); // Column "Current Quarter: Versum"
+                    aveAgreedrs = aveAgreedrs + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
                     aveQrs = counterEachQuarter(libName, aveQrs, oListItem);
-                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x00201")); // Column "Current Quarter: Versum"
+                    arrayAgreedRs.push(oListItem.get_item("Current_x0020_Month_x003a__x0020")); // Column "Current Quarter: Versum"
                 }
 
             }
@@ -1114,12 +1122,40 @@
 
 
         function getQuarter(listName, itemObject) {
-            if (listName == "Infosys") {
+            if (listName == "Accenture") {
+                var quarters = {
+                    Q1: itemObject.get_item('Current_x0020_QTR'),
+                    Q2: itemObject.get_item('xtpu'),
+                    Q3: itemObject.get_item('Trend_x003a__x0020_Last_x0020_30'),
+                    Q4: itemObject.get_item('Month_x0020_1')
+                }
+            } else if (listName == "CAI") {
+                var quarters = {
+                    Q1: itemObject.get_item('Current_x0020_Month_x003a__x00201'),
+                    Q2: itemObject.get_item('xtpu'),
+                    Q3: itemObject.get_item('Trend_x003a__x0020_Last_x0020_30'),
+                    Q4: itemObject.get_item('Month_x0020_1')
+                }
+            } else if (listName == "Hitachi") {
+                var quarters = {
+                    Q1: itemObject.get_item('Current_x0020_QTR'),
+                    Q2: itemObject.get_item('xtpu'),
+                    Q3: itemObject.get_item('Trend_x003a__x0020_Last_x0020_30'),
+                    Q4: itemObject.get_item('Month_x0020_1')
+                }
+            } else if (listName == "Infosys") {
                 var quarters = {
                     Q1: itemObject.get_item('Month_x0020_1'),
                     Q2: itemObject.get_item('ht7j'),
                     Q3: itemObject.get_item('cryx'),
                     Q4: itemObject.get_item('e03i')
+                }
+            } else if (listName == "Microsoft") {
+                var quarters = {
+                    Q1: itemObject.get_item('Current_x0020_Month_x003a__x00201'),
+                    Q2: itemObject.get_item('Current_x0020_QTR'),
+                    Q3: itemObject.get_item('xtpu'),
+                    Q4: itemObject.get_item('Trend_x003a__x0020_Last_x0020_30')
                 }
             } else if (listName == "SAP") {
                 var quarters = {
@@ -1135,12 +1171,19 @@
                     Q3: itemObject.get_item('_x0069_f56'),
                     Q4: itemObject.get_item('gcjs')
                 }
+            } else if (listName == "Virtela") {
+                var quarters = {
+                    Q1: itemObject.get_item('Current_x0020_Month_x003a__x00201'),
+                    Q2: itemObject.get_item('Current_x0020_QTR'),
+                    Q3: itemObject.get_item('_x0069_f56'),
+                    Q4: itemObject.get_item('gcjs')
+                }
             } else {
                 var quarters = {
-                    Q1: itemObject.get_item('Current_x0020_QTR'),
-                    Q2: itemObject.get_item('xtpu'),
-                    Q3: itemObject.get_item('Trend_x003a__x0020_Last_x0020_30'),
-                    Q4: itemObject.get_item('Month_x0020_1')
+                    Q1: itemObject.get_item('Current_x0020_Month_x003a__x00201'),
+                    Q2: itemObject.get_item('Current_x0020_QTR'),
+                    Q3: itemObject.get_item('xtpu'),
+                    Q4: itemObject.get_item('Trend_x003a__x0020_Last_x0020_30')
                 }
             }
 
