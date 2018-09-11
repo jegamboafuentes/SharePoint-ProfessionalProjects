@@ -312,7 +312,7 @@
             console.log("CAI");
             while (listItemEnumerator.moveNext()) {
                 var oListItem = listItemEnumerator.get_current();
-                                console.log(oListItem);
+                console.log(oListItem);
                 if (oListItem.get_item("Metric") == "Operational") {
                     opCounter++;
                     aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
@@ -436,10 +436,10 @@
             var arrayAgreedRs = [];
 
             var listItemEnumerator = collListItem.getEnumerator();
-                        console.log("Hitachi");
+            console.log("Hitachi");
             while (listItemEnumerator.moveNext()) {
                 var oListItem = listItemEnumerator.get_current();
-                                console.log(oListItem);
+                console.log(oListItem);
                 if (oListItem.get_item("Metric") == "Operational") {
                     opCounter++;
                     aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
@@ -688,10 +688,10 @@
             var arrayAgreedRs = [];
 
             var listItemEnumerator = collListItem.getEnumerator();
-                        console.log("Microsoft");
+            console.log("Microsoft");
             while (listItemEnumerator.moveNext()) {
                 var oListItem = listItemEnumerator.get_current();
-                                console.log(oListItem);
+                console.log(oListItem);
                 if (oListItem.get_item("Metric") == "Operational") {
                     opCounter++;
                     aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
@@ -814,7 +814,7 @@
             var arrayAgreedRs = [];
 
             var listItemEnumerator = collListItem.getEnumerator();
-                        console.log("SAP");
+            console.log("SAP");
             while (listItemEnumerator.moveNext()) {
                 var oListItem = listItemEnumerator.get_current();
                 console.log(oListItem);
@@ -940,10 +940,10 @@
             var arrayAgreedRs = [];
 
             var listItemEnumerator = collListItem.getEnumerator();
-                        console.log("Secureworks");
+            console.log("Secureworks");
             while (listItemEnumerator.moveNext()) {
                 var oListItem = listItemEnumerator.get_current();
-                                console.log(oListItem);
+                console.log(oListItem);
                 if (oListItem.get_item("Metric") == "Operational") {
                     opCounter++;
                     aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
@@ -1066,10 +1066,10 @@
             var arrayAgreedRs = [];
 
             var listItemEnumerator = collListItem.getEnumerator();
-                        console.log("Vintella");
+            console.log("Vintella");
             while (listItemEnumerator.moveNext()) {
                 var oListItem = listItemEnumerator.get_current();
-                                console.log(oListItem);
+                console.log(oListItem);
                 if (oListItem.get_item("Metric") == "Operational") {
                     opCounter++;
                     aveAgreedOp = aveAgreedOp + oListItem.get_item("Current_x0020_Month_x003a__x0020"); // Column "Current Quarter: Versum"
@@ -1119,7 +1119,6 @@
         //---Virtela--FIN----------------------------------------------------------------------------------------------------------------
 
         //---Common functions--Start----------------------------------------------------------------------------------------------------------------
-
 
         function getQuarter(listName, itemObject) {
             if (listName == "Accenture") {
@@ -1215,6 +1214,12 @@
         }
 
         function signsForStatus(category, arrayOlist, avAgreed) {
+            var noApply = false;
+            arrayOlist.forEach(function(element) {
+                if (element == null) {
+                    noApply = true;
+                }
+            });
             $('[data-toggle="tooltip"]').tooltip();
             avAgreed = avAgreed.toFixed(1);
             var sign = "<span style='background-color:grey' class='dot' aria-hidden='true'></span>";
@@ -1229,19 +1234,24 @@
             } else if (category == "rs") {
                 toolTip = "";
             }
-            if (avAgreed >= 3) {
-                //sign = "<span style='background-color:green' class='dot' aria-hidden='true'></span>";
-                //sign = "<button type='button' class='btn' data-toggle='tooltip' data-html='true' title='hola'>Tooltip with HTML</button>"
-                //                sign = "<div id='greenSign' class='numberCircle' style='background: #28ef4a;' title='" + toolTip + "'>" + avAgreed + "</div>";
-                //tippy(".numberCircle");
-                sign = "<div id='greenSign' class='numberCircle' style='background: #28ef4a;'>" + avAgreed + "</div>";
-            } else if (avAgreed <= 0) {
-                //sign = "<span style='background-color:red' class='dot' aria-hidden='true'></span>";
-                sign = "<div id='redSign' class='numberCircle' style='background: #ff4545;'>" + avAgreed + "</div>";
-            } else if (avAgreed < 3 && avAgreed > 0) {
-                //sign = "<span style='background-color:yellow' class='dot' aria-hidden='true'></span>";
-                sign = "<div id='yellowSign' class='numberCircle' style='background: yellow;'>" + avAgreed + "</div>";
+            if (noApply == false) {
+                if (avAgreed >= 3) {
+                    //sign = "<span style='background-color:green' class='dot' aria-hidden='true'></span>";
+                    //sign = "<button type='button' class='btn' data-toggle='tooltip' data-html='true' title='hola'>Tooltip with HTML</button>"
+                    //                sign = "<div id='greenSign' class='numberCircle' style='background: #28ef4a;' title='" + toolTip + "'>" + avAgreed + "</div>";
+                    //tippy(".numberCircle");
+                    sign = "<div id='greenSign' class='numberCircle' style='background: #28ef4a;'>" + avAgreed + "</div>";
+                } else if (avAgreed <= 0) {
+                    //sign = "<span style='background-color:red' class='dot' aria-hidden='true'></span>";
+                    sign = "<div id='redSign' class='numberCircle' style='background: #ff4545;'>" + avAgreed + "</div>";
+                } else if (avAgreed < 3 && avAgreed > 0) {
+                    //sign = "<span style='background-color:yellow' class='dot' aria-hidden='true'></span>";
+                    sign = "<div id='yellowSign' class='numberCircle' style='background: yellow;'>" + avAgreed + "</div>";
+                } 
+            } else {
+                sign = "<div id='noApplySign' class='numberCircle' style='background: #a6a6a6;'>" + "N/A" + "</div>";
             }
+
             return sign;
         }
 
